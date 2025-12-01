@@ -3,7 +3,7 @@ import { HeroBanner } from "@/components/HeroBanner";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Truck, CreditCard, RefreshCcw, Shield } from "lucide-react";
+
 
 const Index = () => {
   // Mock data - Esto se reemplazará con tu API de Spring Boot
@@ -103,49 +103,14 @@ const Index = () => {
     },
   ];
 
-  const benefits = [
-    {
-      icon: Truck,
-      title: "Envío Gratis",
-      description: "En compras mayores a S/139",
-    },
-    {
-      icon: CreditCard,
-      title: "Pago Seguro",
-      description: "Múltiples métodos de pago",
-    },
-    {
-      icon: RefreshCcw,
-      title: "Cambios Fáciles",
-      description: "30 días para cambios",
-    },
-    {
-      icon: Shield,
-      title: "Compra Segura",
-      description: "Protección al comprador",
-    },
-  ];
+
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroBanner />
 
-      {/* Benefits Section */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {benefits.map((benefit) => (
-            <div
-              key={benefit.title}
-              className="flex flex-col items-center text-center p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
-            >
-              <benefit.icon className="w-8 h-8 text-primary mb-2" />
-              <h3 className="font-semibold text-sm mb-1">{benefit.title}</h3>
-              <p className="text-xs text-muted-foreground">{benefit.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* Marquee Banner */}
       <section className="bg-primary text-primary-foreground py-3 overflow-hidden">
@@ -208,27 +173,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <section className="bg-secondary text-secondary-foreground py-20 my-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-            ¡No te pierdas las mejores ofertas!
-          </h2>
-          <p className="text-xl mb-8 text-secondary-foreground/80">
-            Suscríbete y recibe un 10% adicional en tu primera compra
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Tu correo electrónico"
-              className="flex-1 px-6 py-3 rounded-lg border-2 border-white/20 bg-white/10 text-secondary-foreground placeholder:text-secondary-foreground/50 focus:outline-none focus:border-primary"
-            />
-            <Button size="lg" className="btn-primary">
-              Suscribirme
-            </Button>
-          </div>
-        </div>
-      </section>
+
 
       <Footer />
     </div>
