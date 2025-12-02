@@ -6,7 +6,7 @@ interface UserMenuProps {
     children: ReactNode;
 }
 
-export const UserMenu = ({ children }: UserMenuProps) => {
+export const MenuUsuario = ({ children }: UserMenuProps) => {
     return (
         <Popover>
             <PopoverTrigger asChild>
