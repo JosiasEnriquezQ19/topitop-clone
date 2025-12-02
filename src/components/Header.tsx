@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CartSidebar } from "./CartSidebar";
+import { UserMenu } from "./UserMenu";
 
 export const Header = () => {
   const [cartCount] = useState(0);
@@ -85,9 +86,11 @@ export const Header = () => {
               <Button variant="ghost" size="icon" className="hover:bg-white/10">
                 <Truck className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="hover:bg-white/10">
-                <User className="w-5 h-5" />
-              </Button>
+              <UserMenu>
+                <Button variant="ghost" size="icon" className="hover:bg-white/10">
+                  <User className="w-5 h-5" />
+                </Button>
+              </UserMenu>
               <CartSidebar>
                 <Button variant="ghost" size="icon" className="relative hover:bg-white/10">
                   <ShoppingBag className="w-5 h-5" />
