@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { CartSidebar } from "./CartSidebar";
 
 export const Header = () => {
   const [cartCount] = useState(0);
@@ -87,12 +88,14 @@ export const Header = () => {
               <Button variant="ghost" size="icon" className="hover:bg-white/10">
                 <User className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative hover:bg-white/10">
-                <ShoppingBag className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              </Button>
+              <CartSidebar>
+                <Button variant="ghost" size="icon" className="relative hover:bg-white/10">
+                  <ShoppingBag className="w-5 h-5" />
+                  <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                </Button>
+              </CartSidebar>
             </div>
 
             {/* Mobile Menu Button */}
