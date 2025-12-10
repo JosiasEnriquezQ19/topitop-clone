@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Inicio from "./pages/Inicio";
 import NoEncontrado from "./pages/NoEncontrado";
 import DetalleProducto from "./pages/DetalleProducto";
+import Catalogo from "./pages/Catalogo";
 import { BotonWhatsApp } from "./components/BotonWhatsApp";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
         <BotonWhatsApp />
         <Routes>
           <Route path="/" element={<Inicio />} />
+          <Route path="/catalogo/:categoria" element={<Catalogo />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NoEncontrado />} />

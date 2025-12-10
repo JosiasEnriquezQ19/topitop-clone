@@ -20,7 +20,7 @@ export const SeccionBohoVibes = () => {
     {
       title: "Boho Vibes",
       description: "¡Descubre la magia del look bohemio y renueva tu closet con piezas llenas de encanto!",
-      videoUrl: "https://topmedia.sfo3.digitaloceanspaces.com/storefront/251121_xiomi.mp4",
+      videoUrl: "https://topmedia.sfo3.digitaloceanspaces.com/storefront/Rrss_Navidad_Xiomi.mp4",
     },
   ];
 

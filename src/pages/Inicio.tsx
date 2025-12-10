@@ -4,6 +4,7 @@ import { TarjetaProducto } from "@/components/TarjetaProducto";
 import { PiePagina } from "@/components/PiePagina";
 import { Button } from "@/components/ui/button";
 import { BannerCategoria } from "@/components/BannerCategoria";
+import { BannerPromoDoble } from "@/components/BannerPromoDoble";
 import { CarruselProductos } from "@/components/CarruselProductos";
 import { SeccionBohoVibes } from "@/components/SeccionBohoVibes";
 import { SeccionProductosFiltrados } from "@/components/SeccionProductosFiltrados";
@@ -172,6 +173,9 @@ const Inicio = () => {
 
       {/* Category Banner - Polos & Shorts */}
       <BannerCategoria />
+
+      {/* Banner Promo Doble - Vestidos y Sets */}
+      <BannerPromoDoble />
 
       {/* Product Carousel - Vestidos */}
       <CarruselProductos 

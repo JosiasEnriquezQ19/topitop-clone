@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CarritoLateral } from "./CarritoLateral";
 import { MenuUsuario } from "./MenuUsuario";
+import { MegaMenu } from "./MegaMenu";
 import {
   Sheet,
   SheetContent,
@@ -17,6 +18,8 @@ export const Encabezado = () => {
   const [cartCount] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [menuTimeout, setMenuTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,13 +30,28 @@ export const Encabezado = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleMenuEnter = (categoryName: string) => {
+    if (menuTimeout) {
+      clearTimeout(menuTimeout);
+      setMenuTimeout(null);
+    }
+    setActiveMenu(categoryName);
+  };
+
+  const handleMenuLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150);
+    setMenuTimeout(timeout);
+  };
+
   const categories = [
-    { name: "Mujer", path: "/mujer" },
-    { name: "Hombre", path: "/hombre" },
-    { name: "Infantil", path: "/infantil" },
-    { name: "Denim", path: "/denim" },
-    { name: "Básicos", path: "/basicos" },
-    { name: "Outlet", path: "/outlet" },
+    { name: "Mujer", path: "/catalogo/mujer" },
+    { name: "Hombre", path: "/catalogo/hombre" },
+    { name: "Infantil", path: "/catalogo/infantil" },
+    { name: "Denim", path: "/catalogo/denim" },
+    { name: "Básicos", path: "/catalogo/basicos" },
+    { name: "Outlet", path: "/catalogo/outlet" },
     { name: "Ayuda", path: "/ayuda" },
   ];
 
@@ -67,13 +85,19 @@ export const Encabezado = () => {
           {/* Center Section: Navigation Links - Desktop Only */}
           <nav className="hidden xl:flex items-center gap-6 absolute left-1/2 transform -translate-x-1/2">
             {categories.map((category) => (
-              <Link
+              <div
                 key={category.name}
-                to={category.path}
-                className={`text-sm font-bold hover:text-primary transition-colors ${textColorClass}`}
+                className="relative"
+                onMouseEnter={() => handleMenuEnter(category.name)}
+                onMouseLeave={handleMenuLeave}
               >
-                {category.name}
-              </Link>
+                <Link
+                  to={category.path}
+                  className={`text-sm font-bold hover:text-primary transition-colors pb-2 block ${textColorClass} ${activeMenu === category.name ? 'border-b-2 border-black' : ''}`}
+                >
+                  {category.name}
+                </Link>
+              </div>
             ))}
           </nav>
 
@@ -169,6 +193,17 @@ export const Encabezado = () => {
 
         </div>
       </div>
+
+      {/* Mega Menu */}
+      {categories.map((category) => (
+        <MegaMenu
+          key={category.name}
+          categoria={category.name}
+          isVisible={activeMenu === category.name}
+          onMouseEnter={() => handleMenuEnter(category.name)}
+          onMouseLeave={handleMenuLeave}
+        />
+      ))}
     </header>
   );
 };
