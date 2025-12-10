@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { CarritoLateral } from "./CarritoLateral";
 import { MenuUsuario } from "./MenuUsuario";
 import { MegaMenu } from "./MegaMenu";
+import { MenuAyuda } from "./MenuAyuda";
 import {
   Sheet,
   SheetContent,
@@ -195,7 +196,7 @@ export const Encabezado = () => {
       </div>
 
       {/* Mega Menu */}
-      {categories.map((category) => (
+      {categories.filter(cat => cat.name !== "Ayuda").map((category) => (
         <MegaMenu
           key={category.name}
           categoria={category.name}
@@ -204,6 +205,13 @@ export const Encabezado = () => {
           onMouseLeave={handleMenuLeave}
         />
       ))}
+      
+      {/* Menu Ayuda */}
+      <MenuAyuda
+        isVisible={activeMenu === "Ayuda"}
+        onMouseEnter={() => handleMenuEnter("Ayuda")}
+        onMouseLeave={handleMenuLeave}
+      />
     </header>
   );
 };

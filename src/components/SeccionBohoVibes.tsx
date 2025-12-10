@@ -28,20 +28,20 @@ export const SeccionBohoVibes = () => {
     {
       id: 1,
       brand: "Xiomi",
-      name: "Polo Mujer Kiana Azul Pacífico",
-      price: 49.95,
+      name: "Vestido Mujer Nina Celeste",
+      price: 59.94,
       originalPrice: 99.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395439-300-400?v=638987643640130000&width=300&height=400&aspect=true",
+      image: "https://topitop.vtexassets.com/arquivos/ids/397049/3154367_1.jpg?v=638999529135800000",
       sizes: ["XS", "S", "M", "L"],
     },
     {
       id: 2,
       brand: "Xiomi",
-      name: "Pantalón Mujer Minerva Crema",
-      price: 69.95,
-      originalPrice: 139.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395431-300-400?v=638987642828100000&width=300&height=400&aspect=true",
-      sizes: ["26", "30"],
+      name: "Vestido Mujer Nina Coco",
+      price: 59.94,
+      originalPrice: 99.90,
+      image: "https://topitop.vtexassets.com/arquivos/ids/397053/3154353_1.jpg?v=638999529611800000",
+      sizes: ["XS", "S", "M", "L"],
     },
   ];
 

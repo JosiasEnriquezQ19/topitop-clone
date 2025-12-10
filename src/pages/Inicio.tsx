@@ -3,10 +3,11 @@ import { BannerPrincipal } from "@/components/BannerPrincipal";
 import { TarjetaProducto } from "@/components/TarjetaProducto";
 import { PiePagina } from "@/components/PiePagina";
 import { Button } from "@/components/ui/button";
-import { BannerCategoria } from "@/components/BannerCategoria";
 import { BannerPromoDoble } from "@/components/BannerPromoDoble";
 import { CarruselProductos } from "@/components/CarruselProductos";
 import { SeccionBohoVibes } from "@/components/SeccionBohoVibes";
+import { SeccionNavidad } from "@/components/SeccionNavidad";
+import { SeccionPolosShorts } from "@/components/SeccionPolosShorts";
 import { SeccionProductosFiltrados } from "@/components/SeccionProductosFiltrados";
 import { GaleriaInstagram } from "@/components/GaleriaInstagram";
 import { SeccionDevoluciones } from "@/components/SeccionDevoluciones";
@@ -171,11 +172,14 @@ const Inicio = () => {
         </div>
       </section>
 
-      {/* Category Banner - Polos & Shorts */}
-      <BannerCategoria />
+      {/* Sección Navidad - Video Carrusel */}
+      <SeccionNavidad />
 
       {/* Banner Promo Doble - Vestidos y Sets */}
       <BannerPromoDoble />
+
+      {/* Sección Polos y Shorts */}
+      <SeccionPolosShorts />
 
       {/* Product Carousel - Vestidos */}
       <CarruselProductos 
