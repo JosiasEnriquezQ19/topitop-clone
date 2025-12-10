@@ -11,21 +11,21 @@ export const BannerPrincipal = () => {
       subtitle: "Hasta 60% de descuento",
       description: "En miles de prendas",
       cta: "Comprar ahora",
-      image: "/img/9b2c81ff-6f40-45b1-8776-ae1cfd7faf95___656e2346110ee8be519429fc7bf73ec9.webp",
+      image: "/images/9b2c81ff-6f40-45b1-8776-ae1cfd7faf95___656e2346110ee8be519429fc7bf73ec9.webp",
     },
     {
       title: "Prendas de Mujer",
       subtitle: "Hasta 50% de descuento",
       description: "En prendas de mujer",
       cta: "Ver Todo",
-      image: "/img/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.webp",
+      image: "/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.webp",
     },
     {
       title: "Prendas de Hombre",
       subtitle: "Hasta 50% de descuento",
       description: "En prendas de hombre",
       cta: "Ver Todo",
-      image: "/img/f9f7a057-f58b-4355-a8a2-7e41761bfa97___c523a7e1b115ee603257463d720ef97f.webp",
+      image: "/images/f9f7a057-f58b-4355-a8a2-7e41761bfa97___c523a7e1b115ee603257463d720ef97f.webp",
     },
   ];
 
