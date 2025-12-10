@@ -35,7 +35,7 @@ const Inicio = () => {
         <BannerPromoDoble />
       </div>
 
-      {/* Sección Navidad - Video Carrusel */}
+      {/* Sección Navidad - Videos Carrusel (Xiomi, Tpt Mujer, Hawk) */}
       <SeccionNavidad />
 
       {/* Sección Polos y Shorts */}

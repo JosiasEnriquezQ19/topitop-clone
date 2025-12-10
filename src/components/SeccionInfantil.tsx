@@ -47,14 +47,14 @@ export const SeccionInfantil = () => {
     {
       title: "Polos y Shorts niñas",
       discount: "50% dscto.",
-      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/d5a93d60-dfc4-4d09-b37c-cd48e4e7af45___e3e08f6f3e8cc5bbeff8629b1ef1bf00.png",
+      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/681f01aa-13ee-43ed-9222-d5a203b18bba___6b183442bbc3027dd63d87577d19aaf7.png",
       link: "/catalogo/infantil?categoria=ninas",
       bgColor: "bg-green-600",
     },
     {
       title: "Polos y bermudas niños",
       discount: "50% dscto.",
-      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/84ca9d74-f2e1-44fb-adde-f8b48e20fa4d___0f11abf34ae3dccd91f4e5d48dbd2f51.png",
+      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/bbac5823-ef26-449e-8162-84c34f58cc3c___acc7e5907ec9dfd78230414f66948e94.png",
       link: "/catalogo/infantil?categoria=ninos",
       bgColor: "bg-green-700",
     },

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const BannerPrincipal = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,6 +28,15 @@ export const BannerPrincipal = () => {
       image: "/images/f9f7a057-f58b-4355-a8a2-7e41761bfa97___c523a7e1b115ee603257463d720ef97f.webp",
     },
   ];
+
+  // Auto-slide cada 8 segundos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 8000);
+
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);

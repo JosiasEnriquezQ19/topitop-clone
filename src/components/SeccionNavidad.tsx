@@ -95,6 +95,35 @@ export const SeccionNavidad = () => {
         },
       ],
     },
+    {
+      id: 3,
+      brand: "Hawk",
+      videoUrl: "https://topmedia.sfo3.digitaloceanspaces.com/storefront/Rrss_Navidad_Hawk.mp4",
+      products: [
+        {
+          id: 6,
+          brand: "Hawk",
+          name: "Bermuda Hombre Freddys Azul Pageant",
+          code: "3142581",
+          price: 64.95,
+          originalPrice: 129.90,
+          discount: 50,
+          image: "https://topitop.vtexassets.com/arquivos/ids/393547/3142582_1.jpg?v=638975724068130000",
+          sizes: ["28", "30", "32", "34"],
+        },
+        {
+          id: 7,
+          brand: "Hawk",
+          name: "Camisa Hombre Tulum Rosado Vintage",
+          code: "3138131",
+          price: 49.95,
+          originalPrice: 99.90,
+          discount: 50,
+          image: "https://topitop.vtexassets.com/arquivos/ids/390553/3138133_1.jpg?v=638949374353270000",
+          sizes: ["S", "M", "L", "XL"],
+        },
+      ],
+    },
   ];
 
   const nextSlide = () => {

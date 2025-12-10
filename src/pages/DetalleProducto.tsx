@@ -5,34 +5,28 @@ import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, ChevronDown, Facebook, Phone, Link2 } from "lucide-react";
-
-// Mock product data - esto se reemplazará con tu API
-const mockProducts: { [key: string]: any } = {
-  "1": {
-    id: 1,
-    brand: "Xiomi",
-    name: "Vestido Mujer Naomi Coco",
-    code: "3154179",
-    price: 64.95,
-    originalPrice: 129.90,
-    discount: 50,
-    images: [
-      "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=500&height=auto&aspect=true",
-    ],
-    sizes: ["XS", "S", "M", "L"],
-    description: "Vestido elegante para mujer con diseño floral, perfecto para cualquier ocasión.",
-    modelInfo: "Modelo usa talla S. Altura: 1.70m",
-  },
-};
+import { getProductById } from "@/data/products";
 
 const DetalleProducto = () => {
   const { id } = useParams();
-  const product = mockProducts[id || "1"] || mockProducts["1"];
+  const product = getProductById(id || "1");
 
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Producto no encontrado</h1>
+          <p className="text-gray-600 mb-4">El producto que buscas no existe.</p>
+          <Button onClick={() => window.history.back()}>Volver</Button>
+        </div>
+      </div>
+    );
+  }
 
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section);
@@ -59,7 +53,7 @@ const DetalleProducto = () => {
           {/* Left - Product Image */}
           <div className="relative">
             <img
-              src={product.images[0]}
+              src={product.images?.[0] || product.image}
               alt={product.name}
               className="w-full h-auto object-cover"
             />
