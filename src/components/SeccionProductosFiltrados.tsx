@@ -18,39 +18,39 @@ interface Category {
 }
 
 export const SeccionProductosFiltrados = () => {
-  const [activeCategory, setActiveCategory] = useState("pack-polos");
+  const [activeCategory, setActiveCategory] = useState("hawk-collection");
 
   const categories: Category[] = [
     {
-      id: "pack-polos",
-      name: "Pack de polos",
+      id: "hawk-collection",
+      name: "Hawk Collection",
       products: [
         {
           id: 1,
-          brand: "Topitop hombre",
-          name: "Pack de 3 polos Hombre Cuello V Blanco / Negro / Verde Militar",
-          price: 59.85,
-          originalPrice: 119.70,
-          image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
-          discount: 50,
+          brand: "Hawk",
+          name: "Bermuda Denim Hombre Zurich Total Dark Grey",
+          price: 83.94,
+          originalPrice: 139.90,
+          image: "https://topitop.vtexassets.com/arquivos/ids/395234/3172804_1.jpg?v=638987618987230000",
+          discount: 40,
         },
         {
           id: 2,
-          brand: "Topitop hombre",
-          name: "Pack de 3 polos manga larga Cuello V Blanco Optico / Azul Oxford / Guinda Sombra",
-          price: 74.85,
-          originalPrice: 149.70,
-          image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
-          discount: 50,
+          brand: "Hawk",
+          name: "Camisa Hombre Lucca Total Dirty Green",
+          price: 77.94,
+          originalPrice: 129.90,
+          image: "https://topitop.vtexassets.com/arquivos/ids/395226/3184606_1.jpg?v=638987618154970000",
+          discount: 40,
         },
         {
           id: 3,
-          brand: "Topitop hombre",
-          name: "Pack de 3 polos Hombre Cuello Redondo Blanco / Gris Poly / Azul Oxford",
-          price: 59.85,
-          originalPrice: 119.70,
-          image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
-          discount: 50,
+          brand: "Hawk",
+          name: "Camisa Hombre Hardin Total Light Bleach",
+          price: 101.94,
+          originalPrice: 169.90,
+          image: "https://topitop.vtexassets.com/arquivos/ids/396596/3172471_1.jpg?v=638993578783400000",
+          discount: 40,
         },
       ],
     },
