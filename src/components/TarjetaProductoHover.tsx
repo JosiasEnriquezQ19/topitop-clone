@@ -27,6 +27,8 @@ export const TarjetaProductoHover = ({
   const [isLiked, setIsLiked] = useState(false);
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div 
@@ -36,11 +38,32 @@ export const TarjetaProductoHover = ({
     >
       {/* Image Container */}
       <Link to={`/producto/${id}`} className="relative overflow-hidden bg-gray-100 block">
-        <img 
-          src={image} 
-          alt={name} 
-          className="w-full aspect-[3/4] object-cover"
-        />
+        {!imageError ? (
+          <img 
+            src={image} 
+            alt={name} 
+            className={`w-full aspect-[3/4] object-cover transition-opacity duration-300 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={() => {
+              setImageLoaded(true);
+              console.log('Image loaded successfully:', image);
+            }}
+            onError={(e) => {
+              console.error('Image failed to load:', image, e);
+              setImageError(true);
+            }}
+          />
+        ) : (
+          <img 
+            src="/placeholder.svg" 
+            alt={name}
+            className="w-full aspect-[3/4] object-cover opacity-50"
+          />
+        )}
+        {!imageLoaded && !imageError && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        )}
         
         {/* Discount Badge */}
         {discount && (
