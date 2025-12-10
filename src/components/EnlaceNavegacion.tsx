@@ -8,7 +8,7 @@ interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
   pendingClassName?: string;
 }
 
-const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
+const EnlaceNavegacion = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
   ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
     return (
       <RouterNavLink
@@ -23,6 +23,6 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
   },
 );
 
-NavLink.displayName = "NavLink";
+EnlaceNavegacion.displayName = "EnlaceNavegacion";
 
-export { NavLink };
+export { EnlaceNavegacion };
