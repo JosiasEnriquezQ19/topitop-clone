@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { TarjetaProductoHover } from "./TarjetaProductoHover";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 interface Product {
   id: number;
@@ -20,16 +20,6 @@ interface ProductCarouselProps {
 
 export const CarruselProductos = ({ title, products }: ProductCarouselProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  
-  // Log de depuración para verificar si los productos llegan correctamente
-  console.log('CarruselProductos renderizado:', { title, products: products.length });
-
-  useEffect(() => {
-    // Asegurar que el carrusel se muestre después del montaje
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -42,7 +32,7 @@ export const CarruselProductos = ({ title, products }: ProductCarouselProps) => 
   };
 
   return (
-    <section className={`py-12 sm:py-20 bg-white transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <section className="py-12 sm:py-20 bg-white">
       {/* Header */}
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between mb-6">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
@@ -75,17 +65,11 @@ export const CarruselProductos = ({ title, products }: ProductCarouselProps) => 
           className="flex gap-4 overflow-x-auto scrollbar-hide px-4 sm:px-6 scroll-smooth"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {products.length > 0 ? (
-            products.map((product) => (
-              <div key={product.id} className="flex-shrink-0 w-[280px] sm:w-[300px]">
-                <TarjetaProductoHover {...product} />
-              </div>
-            ))
-          ) : (
-            <div className="flex items-center justify-center w-full py-8">
-              <p className="text-gray-500">No hay productos disponibles</p>
+          {products.map((product) => (
+            <div key={product.id} className="flex-shrink-0 w-[280px] sm:w-[300px]">
+              <TarjetaProductoHover {...product} />
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>
