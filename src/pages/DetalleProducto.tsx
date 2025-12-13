@@ -6,10 +6,13 @@ import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, ChevronDown, Facebook, Phone, Link2 } from "lucide-react";
 import { getProductById } from "@/data/products";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 const DetalleProducto = () => {
   const { id } = useParams();
   const product = getProductById(id || "1");
+  const { addToCart } = useCart();
 
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -32,16 +35,36 @@ const DetalleProducto = () => {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      toast.error("Por favor selecciona una talla");
+      return;
+    }
+
+    addToCart({
+      id: product.id,
+      brand: product.brand,
+      name: product.name,
+      size: selectedSize,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      quantity: quantity,
+      image: product.image,
+    });
+
+    toast.success("Agregado al carrito");
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Encabezado />
 
       {/* Marquee Banner */}
-      <section className="bg-red-600 text-white py-2 overflow-hidden">
+      <section className="bg-black text-white py-2 overflow-hidden mt-24">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="mx-6 text-xs sm:text-sm font-bold tracking-wider">
-              BLACK FRIDAY WEEK | 50% DSCTO EN TODA LA WEB •
+              FELICES FIESTAS • 🎄 50% DSCTO EN TODA LA WEB •
             </span>
           ))}
         </div>
@@ -141,7 +164,10 @@ const DetalleProducto = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <Button className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-none py-6 text-base font-bold">
+              <Button 
+                onClick={handleAddToCart}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-none py-6 text-base font-bold"
+              >
                 AGREGAR AL CARRITO
               </Button>
             </div>

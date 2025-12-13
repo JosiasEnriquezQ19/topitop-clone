@@ -12,15 +12,15 @@ import productosHombreData from "@/data/productos_hombre.json";
 import productosMujerData from "@/data/productos_mujer.json";
 import productosInfantilData from "@/data/productos_infantil.json";
 
-// Helper to map JSON data to component props and ensure IDs
-const mapProductData = (data: any[]) => data.map((item, index) => ({
-  id: index + 100, // Generate simple unique-ish ID
+// Helper to map JSON data to component props - use code as ID for proper linking
+const mapProductData = (data: any[]) => data.map((item) => ({
+  id: item.code, // Use product code as ID for linking to detail page
   brand: item.brand,
   name: item.name,
   price: item.price,
   originalPrice: item.originalPrice,
   image: item.image,
-  sizes: ["XS", "S", "M", "L", "XL"], // Default sizes as JSON didn't have them in the array provided in chat earlier, or did it? Chat said simple list. I'll default.
+  sizes: ["XS", "S", "M", "L", "XL"],
   discount: item.discount,
 }));
 

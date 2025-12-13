@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface ProductCardHoverProps {
-  id: number;
+  id: number | string;
   brand: string;
   name: string;
   price: number;
