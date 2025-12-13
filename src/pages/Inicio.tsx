@@ -24,7 +24,7 @@ const Inicio = () => {
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="mx-6 text-xs sm:text-sm font-bold tracking-wider">
-              BLACK FRIDAY WEEK •
+              FELICES FIESTAS • 🎄
             </span>
           ))}
         </div>

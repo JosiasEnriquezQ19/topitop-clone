@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 interface ProductItem {
   id: number;
@@ -24,6 +26,7 @@ interface Slide {
 export const SeccionNavidad = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: number]: string }>({});
+  const { addToCart } = useCart();
 
   const slides: Slide[] = [
     {
@@ -138,60 +141,85 @@ export const SeccionNavidad = () => {
     setSelectedSizes((prev) => ({ ...prev, [productId]: size }));
   };
 
+  const handleAddToCart = (product: ProductItem) => {
+    const selectedSize = selectedSizes[product.id];
+    if (!selectedSize) {
+      toast.error("Por favor selecciona una talla");
+      return;
+    }
+    
+    addToCart({
+      id: product.id,
+      brand: product.brand,
+      name: product.name,
+      size: selectedSize,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      quantity: 1,
+      image: product.image,
+    });
+    
+    toast.success("Agregado al carrito");
+  };
+
   const currentSlideData = slides[currentSlide];
 
   return (
     <section className="bg-white py-8 lg:py-0 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 max-w-[1600px]">
+        {/* Mobile: Column layout (video first), Desktop: Row layout */}
         <div className="flex flex-col lg:flex-row lg:h-[700px]">
           
-          {/* Left Panel: Info & Navigation */}
-          <div className="w-full lg:w-1/4 flex flex-col justify-center px-4 lg:pl-12 lg:pr-8 mb-8 lg:mb-0 relative z-10">
+          {/* Left Panel: Info & Navigation - Hidden on mobile, shows after video on tablet */}
+          <div className="order-2 lg:order-1 w-full lg:w-1/4 flex flex-col justify-center px-4 lg:pl-12 lg:pr-8 py-8 lg:py-0 relative z-10">
             {/* Brand Title with Black Background */}
-            <div className="bg-black text-white py-6 px-10 -mx-4 lg:-ml-12 lg:-mr-12 w-[calc(100%+2rem)] lg:w-[calc(100%+4rem)] mb-12 shadow-lg relative z-20">
-               <h2 className="text-4xl font-bold tracking-wide">{currentSlideData.brand}</h2>
+            <div className="bg-black text-white py-4 lg:py-6 px-6 lg:px-10 -mx-4 lg:-ml-12 lg:-mr-12 w-[calc(100%+2rem)] lg:w-[calc(100%+4rem)] mb-6 lg:mb-12 shadow-lg relative z-20">
+               <h2 className="text-2xl lg:text-4xl font-bold tracking-wide text-center lg:text-left">{currentSlideData.brand}</h2>
             </div>
 
-            <div className="space-y-8 pl-2">
-              <p className="text-gray-500 text-lg font-light">
+            <div className="space-y-4 lg:space-y-8 pl-0 lg:pl-2 text-center lg:text-left">
+              <p className="text-gray-500 text-base lg:text-lg font-light">
                 Tu look completo, en un solo paso 🌸
               </p>
               
-              <div className="w-32 border-t-2 border-gray-800"></div>
+              <div className="w-32 border-t-2 border-gray-800 mx-auto lg:mx-0"></div>
 
               {/* Navigation Arrows */}
-              <div className="flex gap-4 pt-8">
+              <div className="flex gap-4 pt-4 lg:pt-8 justify-center lg:justify-start">
                 <button
                   onClick={prevSlide}
-                  className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
+                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4 lg:w-5 lg:h-5" />
                 </button>
                 <button
                   onClick={nextSlide}
-                  className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
+                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Center Panel: Main Video/Image */}
-          <div className="w-full lg:w-1/2 h-[500px] lg:h-full bg-gray-50 relative">
-            <video
-              key={currentSlideData.videoUrl}
-              src={currentSlideData.videoUrl}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            />
+          {/* Center Panel: Main Video/Image - Shows first on mobile */}
+          <div className="order-1 lg:order-2 w-full lg:w-1/2 h-auto lg:h-full flex items-center justify-center bg-gray-50 py-6 lg:py-10">
+             {/* Mobile Screen Ratio Container (9:16) */}
+             <div className="relative w-[200px] sm:w-[260px] lg:w-full lg:max-w-[320px] aspect-[9/16] shadow-2xl rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden border-4 border-gray-900 bg-black">
+                <video
+                  key={currentSlideData.videoUrl}
+                  src={currentSlideData.videoUrl}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+             </div>
           </div>
 
           {/* Right Panel: Products */}
-          <div className="w-full lg:w-1/4 bg-white p-8 flex flex-col justify-center gap-8 h-full overflow-y-auto">
+          <div className="order-3 w-full lg:w-1/4 bg-white p-4 lg:p-8 flex flex-col justify-start lg:justify-center gap-6 lg:gap-8 h-auto lg:h-full overflow-y-auto">
             {currentSlideData.products.map((product) => (
               <div key={product.id} className="flex flex-col gap-3 group">
                 <div className="flex gap-4">
@@ -245,6 +273,7 @@ export const SeccionNavidad = () => {
                 {/* Button below component */}
                  <Button
                    variant="outline"
+                   onClick={() => handleAddToCart(product)}
                    className="w-full rounded-none border-black text-black hover:bg-black hover:text-white uppercase text-xs font-bold tracking-widest py-4 mt-2"
                  >
                    AGREGAR AL CARRITO

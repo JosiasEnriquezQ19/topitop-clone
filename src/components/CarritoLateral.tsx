@@ -1,60 +1,25 @@
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { X, ShoppingCart, Trash2, Plus, Minus } from "lucide-react";
-import { ReactNode, useState } from "react";
-
-interface CartItem {
-    id: number;
-    brand: string;
-    name: string;
-    size: string;
-    price: number;
-    originalPrice?: number;
-    quantity: number;
-    image: string;
-}
+import { ReactNode } from "react";
+import { useCart } from "@/context/CartContext"; // Import context hook
 
 interface CarritoLateralProps {
     children: ReactNode;
 }
 
 export const CarritoLateral = ({ children }: CarritoLateralProps) => {
-    // Mock cart items - esto se conectará con tu estado global/context
-    const [cartItems, setCartItems] = useState<CartItem[]>([
-        {
-            id: 1,
-            brand: "XIOMI",
-            name: "Vestido Mujer Naomi Coco",
-            size: "XS",
-            price: 64.95,
-            originalPrice: 129.90,
-            quantity: 1,
-            image: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=500&height=auto&aspect=true",
-        },
-    ]);
-
-    const updateQuantity = (id: number, newQuantity: number) => {
-        if (newQuantity < 1) return;
-        setCartItems(items =>
-            items.map(item =>
-                item.id === id ? { ...item, quantity: newQuantity } : item
-            )
-        );
-    };
-
-    const removeItem = (id: number) => {
-        setCartItems(items => items.filter(item => item.id !== id));
-    };
+    const { cartItems, removeFromCart, updateQuantity, isCartOpen, setIsCartOpen } = useCart();
 
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const total = subtotal;
 
     return (
-        <Sheet>
+        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetTrigger asChild>
                 {children}
             </SheetTrigger>
-            <SheetContent side="right" className="w-full sm:max-w-[400px] p-0 border-l-0 [&>button]:hidden bg-white">
+            <SheetContent side="right" className="w-full sm:max-w-[400px] p-0 border-l-0 [&>button]:hidden bg-white z-[60]">
                 <div className="flex flex-col h-full">
                     {/* Header Part 1: Close Button */}
                     <div className="flex items-center px-4 py-2 border-b border-gray-100">
@@ -82,9 +47,9 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                         <>
                             <div className="flex-1 overflow-y-auto px-4 py-4">
                                 {cartItems.map((item) => (
-                                    <div key={item.id} className="flex gap-4 pb-4 mb-4 border-b border-gray-100">
+                                    <div key={`${item.id}-${item.size}`} className="flex gap-4 pb-4 mb-4 border-b border-gray-100">
                                         {/* Product Image */}
-                                        <div className="w-20 h-28 flex-shrink-0 bg-gray-50">
+                                        <div className="w-20 h-28 flex-shrink-0 bg-gray-50 border border-gray-200">
                                             <img
                                                 src={item.image}
                                                 alt={item.name}
@@ -103,7 +68,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                                                     <p className="text-xs text-gray-500 mt-1">Talla: {item.size}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => removeItem(item.id)}
+                                                    onClick={() => removeFromCart(item.id)}
                                                     className="text-red-500 hover:text-red-700 p-1"
                                                 >
                                                     <Trash2 className="w-4 h-4" />
@@ -155,7 +120,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                                     <span className="text-sm font-medium">Total</span>
                                     <span className="text-lg font-bold">S/ {total.toFixed(2)}</span>
                                 </div>
-                                <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-none py-6 font-bold">
+                                <Button className="w-full bg-red-600 hover:bg-red-700 text-white rounded-none py-6 font-bold tracking-widest">
                                     FINALIZA TU COMPRA
                                 </Button>
                             </div>

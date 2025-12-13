@@ -8,6 +8,22 @@ import { FiltrosCatalogo } from "@/components/FiltrosCatalogo";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
+import productosHombreData from "@/data/productos_hombre.json";
+import productosMujerData from "@/data/productos_mujer.json";
+import productosInfantilData from "@/data/productos_infantil.json";
+
+// Helper to map JSON data to component props and ensure IDs
+const mapProductData = (data: any[]) => data.map((item, index) => ({
+  id: index + 100, // Generate simple unique-ish ID
+  brand: item.brand,
+  name: item.name,
+  price: item.price,
+  originalPrice: item.originalPrice,
+  image: item.image,
+  sizes: ["XS", "S", "M", "L", "XL"], // Default sizes as JSON didn't have them in the array provided in chat earlier, or did it? Chat said simple list. I'll default.
+  discount: item.discount,
+}));
+
 const Catalogo = () => {
   const { categoria } = useParams<{ categoria: string }>();
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
@@ -24,7 +40,7 @@ const Catalogo = () => {
     },
     infantil: {
       titulo: "Moda Infantil",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/9b2c81ff-6f40-45b1-8776-ae1cfd7faf95___656e2346110ee8be519429fc7bf73ec9.png",
+      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/e759185c-e357-4c48-b224-c84a426e2873___47250bb4fc92c33dc02acdbd25fd3022.png",
     },
     denim: {
       titulo: "Colección Denim",
@@ -34,104 +50,29 @@ const Catalogo = () => {
       titulo: "Básicos Esenciales",
       imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/0b3428ba-89eb-4d6a-9fc5-1eceae228f2f___aa9969c4000aa95e5bcf2bd104ed9aa2.png",
     },
+    outlet: {
+       titulo: "Outlet",
+       imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.png"
+    }
   };
 
   const categoriaActual = categoria || "mujer";
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
 
-  // Mock de productos - esto se conectará con tu API
-  const productos = [
-    {
-      id: 1,
-      brand: "Xiomi",
-      name: "Vestido Mujer Noa Coco",
-      price: 83.94,
-      originalPrice: 119.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=500&height=auto&aspect=true",
-      sizes: ["XS", "S", "M", "L"],
-      discount: 40,
-    },
-    {
-      id: 2,
-      brand: "Xiomi",
-      name: "Vestido Mujer Makawi Azul Náutico",
-      price: 95.94,
-      originalPrice: 159.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395070/3157704_1.jpg?v=638987600808370000",
-      sizes: ["XS", "S", "M", "L"],
-      discount: 40,
-    },
-    {
-      id: 3,
-      brand: "Xiomi",
-      name: "Blusa Mujer Nurid Roseman",
-      price: 99.90,
-      originalPrice: 139.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395543/3172280_1.jpg?v=638992488017270000",
-      sizes: ["S", "M", "L", "XL"],
-      discount: 30,
-    },
-    {
-      id: 4,
-      brand: "Hawk",
-      name: "Polo Hombre Sport Azul",
-      price: 49.90,
-      originalPrice: 89.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=500&height=auto&aspect=true",
-      sizes: ["S", "M", "L", "XL"],
-      discount: 45,
-    },
-    {
-      id: 5,
-      brand: "Topitop",
-      name: "Jean Mujer Skinny Fit",
-      price: 79.90,
-      originalPrice: 129.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395070/3157704_1.jpg?v=638987600808370000",
-      sizes: ["26", "28", "30", "32"],
-      discount: 38,
-    },
-    {
-      id: 6,
-      brand: "Xiomi",
-      name: "Vestido Mujer Floral Print",
-      price: 89.90,
-      originalPrice: 149.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395543/3172280_1.jpg?v=638992488017270000",
-      sizes: ["XS", "S", "M", "L"],
-      discount: 40,
-    },
-    {
-      id: 7,
-      brand: "Basic Woman",
-      name: "Blusa Básica Blanca",
-      price: 39.90,
-      originalPrice: 59.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=500&height=auto&aspect=true",
-      sizes: ["S", "M", "L", "XL"],
-      discount: 33,
-    },
-    {
-      id: 8,
-      brand: "Denim",
-      name: "Jean Mom Fit Celeste",
-      price: 99.90,
-      originalPrice: 159.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395070/3157704_1.jpg?v=638987600808370000",
-      sizes: ["26", "28", "30", "32"],
-      discount: 38,
-    },
-    {
-      id: 9,
-      brand: "Xiomi",
-      name: "Vestido Corto Negro",
-      price: 79.90,
-      originalPrice: 129.90,
-      image: "https://topitop.vtexassets.com/arquivos/ids/395543/3172280_1.jpg?v=638992488017270000",
-      sizes: ["XS", "S", "M", "L"],
-      discount: 38,
-    },
-  ];
+  // Select products based on category
+  let rawProducts = [];
+  if (categoriaActual === "hombre") {
+    rawProducts = productosHombreData;
+  } else if (categoriaActual === "mujer") {
+    rawProducts = productosMujerData;
+  } else if (categoriaActual === "infantil") {
+    rawProducts = productosInfantilData;
+  } else {
+    // Default or mixed for others for now
+    rawProducts = [...productosMujerData, ...productosHombreData].slice(0, 10); 
+  }
+
+  const productos = mapProductData(rawProducts);
 
   const isDenim = categoriaActual === "denim";
 

@@ -7,6 +7,7 @@ import { CarritoLateral } from "./CarritoLateral";
 import { MenuUsuario } from "./MenuUsuario";
 import { MegaMenu } from "./MegaMenu";
 import { MenuAyuda } from "./MenuAyuda";
+import { useCart } from "@/context/CartContext";
 import {
   Sheet,
   SheetContent,
@@ -16,7 +17,7 @@ import {
 } from "@/components/ui/sheet";
 
 export const Encabezado = () => {
-  const [cartCount] = useState(0);
+  const { cartCount } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
