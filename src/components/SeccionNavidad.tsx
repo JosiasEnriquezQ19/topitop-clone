@@ -141,31 +141,44 @@ export const SeccionNavidad = () => {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <section className="bg-white py-8 sm:py-12">
-      <div className="container mx-auto px-4 sm:px-6">
-        {/* Header con navegación */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold">{currentSlideData.brand}</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+    <section className="bg-white py-8 lg:py-0 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 max-w-[1600px]">
+        <div className="flex flex-col lg:flex-row lg:h-[700px]">
+          
+          {/* Left Panel: Info & Navigation */}
+          <div className="w-full lg:w-1/4 flex flex-col justify-center px-4 lg:pl-12 lg:pr-8 mb-8 lg:mb-0 relative z-10">
+            {/* Brand Title with Black Background */}
+            <div className="bg-black text-white py-6 px-10 -mx-4 lg:-ml-12 lg:-mr-12 w-[calc(100%+2rem)] lg:w-[calc(100%+4rem)] mb-12 shadow-lg relative z-20">
+               <h2 className="text-4xl font-bold tracking-wide">{currentSlideData.brand}</h2>
+            </div>
 
-        {/* Grid: Video + Productos */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Video */}
-          <div className="relative bg-black rounded-lg overflow-hidden">
+            <div className="space-y-8 pl-2">
+              <p className="text-gray-500 text-lg font-light">
+                Tu look completo, en un solo paso 🌸
+              </p>
+              
+              <div className="w-32 border-t-2 border-gray-800"></div>
+
+              {/* Navigation Arrows */}
+              <div className="flex gap-4 pt-8">
+                <button
+                  onClick={prevSlide}
+                  className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Center Panel: Main Video/Image */}
+          <div className="w-full lg:w-1/2 h-[500px] lg:h-full bg-gray-50 relative">
             <video
               key={currentSlideData.videoUrl}
               src={currentSlideData.videoUrl}
@@ -173,81 +186,75 @@ export const SeccionNavidad = () => {
               loop
               muted
               playsInline
-              className="w-full h-full object-cover min-h-[400px] lg:min-h-[600px]"
+              className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Productos */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+          {/* Right Panel: Products */}
+          <div className="w-full lg:w-1/4 bg-white p-8 flex flex-col justify-center gap-8 h-full overflow-y-auto">
             {currentSlideData.products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
-              >
-                {/* Imagen del producto */}
-                <div className="relative group">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full aspect-[3/4] object-cover"
-                  />
-                  {/* Badge de descuento */}
-                  <div className="absolute top-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
-                    -{product.discount}%
+              <div key={product.id} className="flex flex-col gap-3 group">
+                <div className="flex gap-4">
+                  {/* Product Image */}
+                  <div className="w-1/3 min-w-[100px] relative cursor-pointer">
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-full aspect-[3/4] object-cover hover:opacity-90 transition-opacity"
+                      />
                   </div>
-                  {/* Icono de favorito */}
-                  <button className="absolute top-2 right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <Heart className="w-4 h-4" />
-                  </button>
+
+                  {/* Info */}
+                  <div className="flex-1 flex flex-col justify-between">
+                     <div>
+                       <p className="text-xs text-gray-400 mb-1">{product.brand}</p>
+                       <h3 className="text-sm font-medium mb-2 line-clamp-2 hover:underline cursor-pointer">
+                         {product.name}
+                       </h3>
+                       
+                       <div className="flex items-center gap-3 mb-2">
+                         <span className="font-bold text-lg">S/ {product.price.toFixed(2)}</span>
+                         {product.originalPrice > product.price && (
+                           <span className="text-xs text-gray-400 line-through">
+                             S/ {product.originalPrice.toFixed(2)}
+                           </span>
+                         )}
+                       </div>
+                     </div>
+
+                     {/* Sizes */}
+                     <div className="flex flex-wrap gap-2">
+                         <span className="text-xs text-black w-full font-medium">Talla</span>
+                        {product.sizes.map((size) => (
+                           <button
+                             key={size}
+                             onClick={() => handleSizeSelect(product.id, size)}
+                             className={`w-8 h-8 rounded-full border text-xs flex items-center justify-center transition-colors ${
+                               selectedSizes[product.id] === size
+                                 ? "bg-black text-white border-black"
+                                 : "border-gray-200 text-gray-600 hover:border-black"
+                             }`}
+                           >
+                             {size}
+                           </button>
+                        ))}
+                     </div>
+                  </div>
                 </div>
-
-                {/* Info del producto */}
-                <div className="p-4">
-                  <p className="text-xs text-gray-500 mb-1">{product.brand}</p>
-                  <h3 className="text-sm font-medium mb-1 line-clamp-2 hover:underline cursor-pointer">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-gray-400 mb-2">Código: {product.code}</p>
-
-                  {/* Precio */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-lg font-bold">S/ {product.price.toFixed(2)}</span>
-                    <span className="text-sm text-gray-400 line-through">
-                      S/ {product.originalPrice.toFixed(2)}
-                    </span>
-                  </div>
-
-                  {/* Tallas */}
-                  <div className="mb-3">
-                    <span className="text-xs text-gray-500 mb-2 block">Talla</span>
-                    <div className="flex gap-2">
-                      {product.sizes.map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => handleSizeSelect(product.id, size)}
-                          className={`w-10 h-10 rounded-full border text-xs font-medium transition-colors ${
-                            selectedSizes[product.id] === size
-                              ? "bg-black text-white border-black"
-                              : "border-gray-300 hover:border-black"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Botón agregar al carrito */}
-                  <Button
-                    variant="outline"
-                    className="w-full rounded-none border-black text-black hover:bg-black hover:text-white text-xs py-2"
-                  >
-                    AGREGAR AL CARRITO
-                  </Button>
-                </div>
+                
+                {/* Button below component */}
+                 <Button
+                   variant="outline"
+                   className="w-full rounded-none border-black text-black hover:bg-black hover:text-white uppercase text-xs font-bold tracking-widest py-4 mt-2"
+                 >
+                   AGREGAR AL CARRITO
+                 </Button>
+                 
+                 <div className="w-full border-t border-gray-100 my-2"></div>
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
