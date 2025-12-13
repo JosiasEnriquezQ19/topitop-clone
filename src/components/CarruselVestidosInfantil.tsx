@@ -2,6 +2,8 @@ import { ChevronLeft, ChevronRight, ArrowRight, Heart } from "lucide-react";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 interface Product {
   id: number;
@@ -17,6 +19,7 @@ interface Product {
 export const CarruselVestidosInfantil = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: number]: string }>({});
+  const { addToCart } = useCart();
 
   const products: Product[] = [
     {
@@ -63,6 +66,27 @@ export const CarruselVestidosInfantil = () => {
     setSelectedSizes((prev) => ({ ...prev, [productId]: size }));
   };
 
+  const handleAddToCart = (product: Product) => {
+    const selectedSize = selectedSizes[product.id];
+    if (!selectedSize) {
+      toast.error("Por favor selecciona una talla");
+      return;
+    }
+    
+    addToCart({
+      id: product.code,
+      brand: product.brand,
+      name: product.name,
+      size: selectedSize,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      quantity: 1,
+      image: product.image,
+    });
+    
+    toast.success("Agregado al carrito");
+  };
+
   const sizes = ["02", "04", "06", "08", "10", "12", "14"];
 
   return (
@@ -106,7 +130,7 @@ export const CarruselVestidosInfantil = () => {
             >
               {/* Imagen del producto */}
               <div className="relative group">
-                <Link to={`/producto/${product.id}`}>
+                <Link to={`/producto/${product.code}`}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -128,7 +152,7 @@ export const CarruselVestidosInfantil = () => {
               {/* Info del producto */}
               <div className="p-4">
                 <p className="text-xs text-gray-500 mb-1">{product.brand}</p>
-                <Link to={`/producto/${product.id}`}>
+                <Link to={`/producto/${product.code}`}>
                   <h3 className="text-sm font-medium mb-1 line-clamp-2 hover:underline cursor-pointer">
                     {product.name}
                   </h3>
@@ -168,8 +192,8 @@ export const CarruselVestidosInfantil = () => {
                 {/* Botón agregar al carrito */}
                 <Button
                   variant="outline"
+                  onClick={() => handleAddToCart(product)}
                   className="w-full rounded-none border-black text-black hover:bg-black hover:text-white text-xs font-semibold py-5"
-                  disabled={!selectedSizes[product.id]}
                 >
                   AGREGAR AL CARRITO
                 </Button>

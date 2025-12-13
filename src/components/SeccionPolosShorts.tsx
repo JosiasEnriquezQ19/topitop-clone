@@ -2,6 +2,8 @@ import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 interface ProductItem {
   id: number;
@@ -17,6 +19,7 @@ interface ProductItem {
 
 export const SeccionPolosShorts = () => {
   const [selectedSizes, setSelectedSizes] = useState<{ [key: number]: string }>({});
+  const { addToCart } = useCart();
 
   const products: ProductItem[] = [
     {
@@ -58,6 +61,27 @@ export const SeccionPolosShorts = () => {
     setSelectedSizes((prev) => ({ ...prev, [productId]: size }));
   };
 
+  const handleAddToCart = (product: ProductItem) => {
+    const selectedSize = selectedSizes[product.id];
+    if (!selectedSize) {
+      toast.error("Por favor selecciona una talla");
+      return;
+    }
+    
+    addToCart({
+      id: product.code,
+      brand: product.brand,
+      name: product.name,
+      size: selectedSize,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      quantity: 1,
+      image: product.image,
+    });
+    
+    toast.success("Agregado al carrito");
+  };
+
   return (
     <section className="bg-gray-50 py-8 sm:py-12">
       <div className="container mx-auto px-4 sm:px-6">
@@ -78,7 +102,7 @@ export const SeccionPolosShorts = () => {
             >
               {/* Imagen del producto */}
               <div className="relative">
-                <Link to={`/producto/${product.id}`}>
+                <Link to={`/producto/${product.code}`}>
                   <img
                     src={product.image}
                     alt={product.name}
@@ -98,7 +122,7 @@ export const SeccionPolosShorts = () => {
               {/* Info del producto */}
               <div className="p-4">
                 <p className="text-xs text-gray-500 mb-1">{product.brand}</p>
-                <Link to={`/producto/${product.id}`}>
+                <Link to={`/producto/${product.code}`}>
                   <h3 className="text-sm font-medium mb-1 line-clamp-2 hover:underline cursor-pointer">
                     {product.name}
                   </h3>
@@ -136,8 +160,8 @@ export const SeccionPolosShorts = () => {
                 {/* Botón agregar al carrito */}
                 <Button
                   variant="outline"
+                  onClick={() => handleAddToCart(product)}
                   className="w-full rounded-none border-black text-black hover:bg-black hover:text-white text-sm font-semibold py-5"
-                  disabled={!selectedSizes[product.id]}
                 >
                   AGREGAR AL CARRITO
                 </Button>

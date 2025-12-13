@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Heart, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: number;
   brand: string;
   name: string;
+  code: string;
   price: number;
   originalPrice?: number;
   image: string;
@@ -29,6 +31,7 @@ export const SeccionProductosFiltrados = () => {
           id: 1,
           brand: "Hawk",
           name: "Bermuda Denim Hombre Zurich Total Dark Grey",
+          code: "3172802",
           price: 83.94,
           originalPrice: 139.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/395234/3172804_1.jpg?v=638987618987230000",
@@ -38,6 +41,7 @@ export const SeccionProductosFiltrados = () => {
           id: 2,
           brand: "Hawk",
           name: "Camisa Hombre Lucca Total Dirty Green",
+          code: "3184605",
           price: 77.94,
           originalPrice: 129.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/395226/3184606_1.jpg?v=638987618154970000",
@@ -47,6 +51,7 @@ export const SeccionProductosFiltrados = () => {
           id: 3,
           brand: "Hawk",
           name: "Camisa Hombre Hardin Total Light Bleach",
+          code: "3172470",
           price: 101.94,
           originalPrice: 169.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/396596/3172471_1.jpg?v=638993578783400000",
@@ -62,6 +67,7 @@ export const SeccionProductosFiltrados = () => {
           id: 4,
           brand: "Topitop hombre",
           name: "Jogger Hombre Negro Deportivo",
+          code: "3142581",
           price: 69.95,
           originalPrice: 139.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
@@ -71,6 +77,7 @@ export const SeccionProductosFiltrados = () => {
           id: 5,
           brand: "Topitop hombre",
           name: "Jogger Hombre Gris Urbano",
+          code: "3138131",
           price: 64.95,
           originalPrice: 129.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
@@ -86,6 +93,7 @@ export const SeccionProductosFiltrados = () => {
           id: 6,
           brand: "Hawk",
           name: "Casaca Hombre Denim Azul",
+          code: "3142927",
           price: 89.95,
           originalPrice: 179.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
@@ -101,6 +109,7 @@ export const SeccionProductosFiltrados = () => {
           id: 7,
           brand: "Topitop hombre",
           name: "Short Hombre Cargo Beige",
+          code: "3142934",
           price: 49.95,
           originalPrice: 99.90,
           image: "https://topitop.vtexassets.com/arquivos/ids/381265-483-725?v=638678395399830000&width=483&height=725&aspect=true",
@@ -133,9 +142,9 @@ export const SeccionProductosFiltrados = () => {
               </button>
             ))}
           </div>
-          <a href="#" className="flex items-center gap-1 text-sm font-medium hover:underline flex-shrink-0 ml-4">
+          <Link to="/catalogo/hombre" className="flex items-center gap-1 text-sm font-medium hover:underline flex-shrink-0 ml-4">
             VER TODO <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
 
         {/* Products Grid with Navigation */}
@@ -151,13 +160,13 @@ export const SeccionProductosFiltrados = () => {
           {/* Products */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {activeProducts.map((product) => (
-              <div key={product.id} className="bg-white group">
+              <Link to={`/producto/${product.code}`} key={product.id} className="bg-white group block">
                 {/* Image */}
                 <div className="relative overflow-hidden bg-gray-50 aspect-square">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {/* Discount Badge */}
                   {product.discount && (
@@ -174,7 +183,7 @@ export const SeccionProductosFiltrados = () => {
                 {/* Info */}
                 <div className="p-4">
                   <p className="text-xs text-blue-600 mb-1">{product.brand}</p>
-                  <h3 className="text-sm text-gray-800 mb-2 line-clamp-2 hover:underline cursor-pointer">
+                  <h3 className="text-sm text-gray-800 mb-2 line-clamp-2 group-hover:underline">
                     {product.name}
                   </h3>
                   <div className="flex items-center gap-2">
@@ -186,7 +195,7 @@ export const SeccionProductosFiltrados = () => {
                     <span className="text-base font-bold">S/ {product.price.toFixed(2)}</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
