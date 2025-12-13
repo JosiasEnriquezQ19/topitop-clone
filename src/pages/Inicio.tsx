@@ -31,12 +31,14 @@ const Inicio = () => {
       </section>
 
       {/* Banner Promo Doble - Vestidos y Sets */}
-      <div className="mt-8 sm:mt-12">
+      <div className="mt-8 sm:mt-12 mb-12 sm:mb-16 lg:mb-20">
         <BannerPromoDoble />
       </div>
 
       {/* Sección Navidad - Videos Carrusel (Xiomi, Tpt Mujer, Hawk) */}
-      <SeccionNavidad />
+      <div className="mt-8 sm:mt-12">
+        <SeccionNavidad />
+      </div>
 
       {/* Sección Polos y Shorts */}
       <SeccionPolosShorts />

@@ -1,6 +1,10 @@
 // Base de datos mock de productos
 // En producción esto vendría de tu API de Spring Boot
 
+import productosHombreData from "./productos_hombre.json";
+import productosMujerData from "./productos_mujer.json";
+import productosInfantilData from "./productos_infantil.json";
+
 export interface Product {
   id: number;
   brand: string;
@@ -269,9 +273,44 @@ export const productsDatabase: { [key: string]: Product } = {
   },
 };
 
+// Combine JSON products into a searchable array
+const allJsonProducts = [
+  ...productosHombreData.map((p: any, i: number) => ({ ...p, id: `hombre-${i}`, category: "hombre" })),
+  ...productosMujerData.map((p: any, i: number) => ({ ...p, id: `mujer-${i}`, category: "mujer" })),
+  ...productosInfantilData.map((p: any, i: number) => ({ ...p, id: `infantil-${i}`, category: "infantil" })),
+];
+
 // Función helper para obtener un producto por ID
 export const getProductById = (id: string | number): Product | undefined => {
-  return productsDatabase[id.toString()];
+  // First check in the main database
+  const fromDatabase = productsDatabase[id.toString()];
+  if (fromDatabase) return fromDatabase;
+  
+  // If not found and ID is numeric, check JSON products by code
+  const searchId = id.toString();
+  const fromJson = allJsonProducts.find(p => 
+    p.code === searchId || p.id === searchId || p.id === parseInt(searchId)
+  );
+  
+  if (fromJson) {
+    return {
+      id: typeof fromJson.id === 'number' ? fromJson.id : parseInt(fromJson.code) || 0,
+      brand: fromJson.brand,
+      name: fromJson.name,
+      code: fromJson.code,
+      price: fromJson.price,
+      originalPrice: fromJson.originalPrice,
+      discount: fromJson.discount,
+      image: fromJson.image,
+      images: [fromJson.image],
+      sizes: ["XS", "S", "M", "L", "XL"],
+      description: `${fromJson.name} de la marca ${fromJson.brand}.`,
+      modelInfo: "Modelo usa talla M.",
+      category: fromJson.category,
+    };
+  }
+  
+  return undefined;
 };
 
 // Función helper para obtener productos por categoría
