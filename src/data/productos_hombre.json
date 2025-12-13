@@ -6,7 +6,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396732/3140071_1.jpg?v=638993787754600000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396732/3140071_1.jpg?v=638993787754600000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Topitop hombre",
@@ -15,7 +16,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396744/3147605_1.jpg?v=638993789041600000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396744/3147605_1.jpg?v=638993789041600000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Topitop hombre",
@@ -24,16 +26,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396704/3138346_1.jpg?v=638993784634100000"
-  },
-  {
-    "brand": "Topitop hombre",
-    "name": "Camisa Hombre Dilan Blanco Optico",
-    "code": "3138345",
-    "price": 44.95,
-    "originalPrice": 89.90,
-    "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396704/3138346_1.jpg?v=638993784634100000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396704/3138346_1.jpg?v=638993784634100000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Topitop hombre",
@@ -42,7 +36,8 @@
     "price": 39.95,
     "originalPrice": 79.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396716/3138180_1.jpg?v=638993785927970000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396716/3138180_1.jpg?v=638993785927970000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Topitop hombre",
@@ -51,7 +46,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396712/3138239_1.jpg?v=638993785521700000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396712/3138239_1.jpg?v=638993785521700000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Topitop hombre",
@@ -60,7 +56,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396676/3164987_1.jpg?v=638993781530630000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396676/3164987_1.jpg?v=638993781530630000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Hawk",
@@ -69,7 +66,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394765/3145536_1.jpg?v=638987566136930000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394765/3145536_1.jpg?v=638987566136930000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Hawk",
@@ -78,7 +76,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394761/3145529_1.jpg?v=638987565709400000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394761/3145529_1.jpg?v=638987565709400000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Hawk",
@@ -87,7 +86,8 @@
     "price": 49.95,
     "originalPrice": 99.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394724/3156611_1.jpg?v=638987561417800000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394724/3156611_1.jpg?v=638987561417800000",
+    "sizes": ["28", "30", "32", "34", "36"]
   },
   {
     "brand": "Hawk",
@@ -96,7 +96,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394748/3145694_1.jpg?v=638987564340200000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394748/3145694_1.jpg?v=638987564340200000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Hawk",
@@ -105,7 +106,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394740/3157150_1.jpg?v=638987563275300000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394740/3157150_1.jpg?v=638987563275300000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   },
   {
     "brand": "Hawk",
@@ -114,7 +116,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394728-500-auto?v=638987561854130000&width=500&height=auto&aspect=true"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394728-500-auto?v=638987561854130000&width=500&height=auto&aspect=true",
+    "sizes": ["28", "30", "32", "34", "36"]
   },
   {
     "brand": "Hawk",
@@ -123,7 +126,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/394736/3145994_1.jpg?v=638987562760200000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394736/3145994_1.jpg?v=638987562760200000",
+    "sizes": ["28", "30", "32", "34", "36"]
   },
   {
     "brand": "Topitop hombre",
@@ -132,6 +136,7 @@
     "price": 139.95,
     "originalPrice": 279.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396724/3134477_1.jpg?v=638993786874270000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396724/3134477_1.jpg?v=638993786874270000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
   }
 ]

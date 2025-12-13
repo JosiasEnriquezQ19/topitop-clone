@@ -6,7 +6,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395262/3162982_1.jpg?v=638987625512070000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395262/3162982_1.jpg?v=638987625512070000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -15,7 +16,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395298/3148080_1.jpg?v=638987628932430000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395298/3148080_1.jpg?v=638987628932430000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -24,7 +26,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395301/3142758_1.jpg?v=638987629322130000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395301/3142758_1.jpg?v=638987629322130000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -33,7 +36,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395274/3133475_1.jpg?v=638987626870400000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395274/3133475_1.jpg?v=638987626870400000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -42,7 +46,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395305/3136455_1.jpg?v=638987629731070000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395305/3136455_1.jpg?v=638987629731070000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -51,7 +56,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395270/3153562_1.jpg?v=638987626444700000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395270/3153562_1.jpg?v=638987626444700000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -60,7 +66,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395278/3153588_1.jpg?v=638987627287170000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395278/3153588_1.jpg?v=638987627287170000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -69,7 +76,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395290/3146861_1.jpg?v=638987628091100000" 
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395290/3146861_1.jpg?v=638987628091100000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -78,7 +86,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395290/3146861_1.jpg?v=638987628091100000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395290/3146861_1.jpg?v=638987628091100000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -87,7 +96,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395294/3132325_1.jpg?v=638987628501670000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395294/3132325_1.jpg?v=638987628501670000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -96,7 +106,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395286/3143726_1.jpg?v=638987627825570000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395286/3143726_1.jpg?v=638987627825570000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -105,7 +116,8 @@
     "price": 34.95,
     "originalPrice": 69.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395313/3146909_1.jpg?v=638987630542970000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395313/3146909_1.jpg?v=638987630542970000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -114,7 +126,8 @@
     "price": 39.95,
     "originalPrice": 79.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395317/3131343_1.jpg?v=638987630948670000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395317/3131343_1.jpg?v=638987630948670000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -123,7 +136,8 @@
     "price": 39.95,
     "originalPrice": 79.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395309/3169922_1.jpg?v=638987630130400000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395309/3169922_1.jpg?v=638987630130400000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   },
   {
     "brand": "Topitop Kids",
@@ -132,6 +146,7 @@
     "price": 19.95,
     "originalPrice": 39.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395345/3136825_1.jpg?v=638987633859700000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395345/3136825_1.jpg?v=638987633859700000",
+    "sizes": ["02", "04", "06", "08", "10", "12", "14"]
   }
 ]

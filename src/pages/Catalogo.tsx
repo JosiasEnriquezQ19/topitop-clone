@@ -14,13 +14,13 @@ import productosInfantilData from "@/data/productos_infantil.json";
 
 // Helper to map JSON data to component props - use code as ID for proper linking
 const mapProductData = (data: any[]) => data.map((item) => ({
-  id: item.code, // Use product code as ID for linking to detail page
+  id: item.code,
   brand: item.brand,
   name: item.name,
   price: item.price,
   originalPrice: item.originalPrice,
   image: item.image,
-  sizes: ["XS", "S", "M", "L", "XL"],
+  sizes: item.sizes || ["S", "M", "L", "XL"],
   discount: item.discount,
 }));
 

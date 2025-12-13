@@ -6,7 +6,8 @@
     "price": 69.95,
     "originalPrice": 139.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395692/3157129_1.jpg?v=638992593268930000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395692/3157129_1.jpg?v=638992593268930000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -15,7 +16,8 @@
     "price": 79.95,
     "originalPrice": 159.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395704/3164068_1.jpg?v=638992594541770000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395704/3164068_1.jpg?v=638992594541770000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -24,7 +26,8 @@
     "price": 49.95,
     "originalPrice": 99.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/396769/3163984_1.jpg?v=638993791673270000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396769/3163984_1.jpg?v=638993791673270000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -33,7 +36,8 @@
     "price": 49.95,
     "originalPrice": 99.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395816/3140011_1.jpg?v=638992606411030000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395816/3140011_1.jpg?v=638992606411030000",
+    "sizes": ["26", "28", "30", "32", "34"]
   },
   {
     "brand": "Xiomi",
@@ -42,7 +46,8 @@
     "price": 49.95,
     "originalPrice": 99.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395716/3154220_1.jpg?v=638992595811800000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395716/3154220_1.jpg?v=638992595811800000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -51,7 +56,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395837/3155123_1.jpg?v=638992608563630000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395837/3155123_1.jpg?v=638992608563630000",
+    "sizes": ["26", "28", "30", "32", "34"]
   },
   {
     "brand": "Disney",
@@ -60,7 +66,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395800/3132503_1.jpg?v=638992604754800000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395800/3132503_1.jpg?v=638992604754800000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -69,7 +76,8 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395756/3154682_1.jpg?v=638992599956000000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395756/3154682_1.jpg?v=638992599956000000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -78,7 +86,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395841/3131930_1.jpg?v=638992609000970000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395841/3131930_1.jpg?v=638992609000970000",
+    "sizes": ["26", "28", "30", "32", "34"]
   },
   {
     "brand": "Xiomi",
@@ -87,7 +96,8 @@
     "price": 64.95,
     "originalPrice": 129.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395700/3154654_1.jpg?v=638992594124970000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395700/3154654_1.jpg?v=638992594124970000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -96,7 +106,8 @@
     "price": 69.95,
     "originalPrice": 139.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395696/3155144_1.jpg?v=638992593706170000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395696/3155144_1.jpg?v=638992593706170000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -105,7 +116,8 @@
     "price": 49.95,
     "originalPrice": 99.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395821/3155109_1.jpg?v=638992606854700000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395821/3155109_1.jpg?v=638992606854700000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -114,7 +126,8 @@
     "price": 29.95,
     "originalPrice": 59.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395760/3154617_1.jpg?v=638992600378100000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395760/3154617_1.jpg?v=638992600378100000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   },
   {
     "brand": "Xiomi",
@@ -123,7 +136,8 @@
     "price": 59.95,
     "originalPrice": 119.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395804/3154638_1.jpg?v=638992605178070000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395804/3154638_1.jpg?v=638992605178070000",
+    "sizes": ["26", "28", "30", "32", "34"]
   },
   {
     "brand": "Xiomi",
@@ -132,6 +146,7 @@
     "price": 44.95,
     "originalPrice": 89.90,
     "discount": 50,
-    "image": "https://topitop.vtexassets.com/arquivos/ids/395712/3156164_1.jpg?v=638992595381300000"
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395712/3156164_1.jpg?v=638992595381300000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
   }
 ]

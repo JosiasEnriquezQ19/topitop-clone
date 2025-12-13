@@ -286,13 +286,38 @@ export const getProductById = (id: string | number): Product | undefined => {
   const fromDatabase = productsDatabase[id.toString()];
   if (fromDatabase) return fromDatabase;
   
-  // If not found and ID is numeric, check JSON products by code
+  // If not found, check JSON products by code
   const searchId = id.toString();
   const fromJson = allJsonProducts.find(p => 
     p.code === searchId || p.id === searchId || p.id === parseInt(searchId)
   );
   
   if (fromJson) {
+    // Determine sizes based on product data or category
+    let sizes: string[] = fromJson.sizes;
+    if (!sizes) {
+      // Fallback logic based on category
+      if (fromJson.category === "infantil") {
+        sizes = ["02", "04", "06", "08", "10", "12", "14"];
+      } else if (fromJson.category === "hombre") {
+        // Check if it's pants/bermuda by name
+        const name = fromJson.name?.toLowerCase() || "";
+        if (name.includes("bermuda") || name.includes("pantalón") || name.includes("short") || name.includes("jean")) {
+          sizes = ["28", "30", "32", "34", "36"];
+        } else {
+          sizes = ["S", "M", "L", "XL", "XXL"];
+        }
+      } else {
+        // Women's default
+        const name = fromJson.name?.toLowerCase() || "";
+        if (name.includes("pantalón") || name.includes("short") || name.includes("falda") || name.includes("jean")) {
+          sizes = ["26", "28", "30", "32", "34"];
+        } else {
+          sizes = ["XS", "S", "M", "L", "XL"];
+        }
+      }
+    }
+    
     return {
       id: typeof fromJson.id === 'number' ? fromJson.id : parseInt(fromJson.code) || 0,
       brand: fromJson.brand,
@@ -303,7 +328,7 @@ export const getProductById = (id: string | number): Product | undefined => {
       discount: fromJson.discount,
       image: fromJson.image,
       images: [fromJson.image],
-      sizes: ["XS", "S", "M", "L", "XL"],
+      sizes: sizes,
       description: `${fromJson.name} de la marca ${fromJson.brand}.`,
       modelInfo: "Modelo usa talla M.",
       category: fromJson.category,
