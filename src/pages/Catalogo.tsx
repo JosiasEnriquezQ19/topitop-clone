@@ -7,6 +7,7 @@ import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
 import { FiltrosCatalogo } from "@/components/FiltrosCatalogo";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { useProductosPorCategoria } from "@/hooks/use-productos";
 
 import productosHombreData from "@/data/productos_hombre.json";
 import productosMujerData from "@/data/productos_mujer.json";
@@ -59,12 +60,31 @@ const Catalogo = () => {
   const categoriaActual = categoria || "mujer";
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
 
+  // Hook para obtener productos de Mujer desde el backend
+  // Subcategorías de Mujer: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
+  const { data: productosBackendMujer, isLoading: cargandoMujer } = useProductosPorCategoria(
+    categoriaActual === "mujer" ? [1, 2, 3, 4] : []
+  );
+
   // Select products based on category
   let rawProducts = [];
   if (categoriaActual === "hombre") {
     rawProducts = productosHombreData;
   } else if (categoriaActual === "mujer") {
-    rawProducts = productosMujerData;
+    // Usar productos del backend si están disponibles
+    if (productosBackendMujer && productosBackendMujer.length > 0) {
+      rawProducts = productosBackendMujer.map((p: any) => ({
+        code: p.idProducto,
+        brand: "TopItop",
+        name: p.nombre,
+        price: p.precio,
+        image: p.imagenUrl || "https://via.placeholder.com/300x400",
+        sizes: ["XS", "S", "M", "L", "XL"],
+      }));
+    } else if (!cargandoMujer) {
+      // Si no hay datos del backend y terminó de cargar, usar JSON local
+      rawProducts = productosMujerData;
+    }
   } else if (categoriaActual === "infantil") {
     rawProducts = productosInfantilData;
   } else {

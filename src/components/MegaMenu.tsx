@@ -17,7 +17,7 @@ export const MegaMenu = ({ categoria, isVisible, onMouseEnter, onMouseLeave }: M
   // Configuración de subcategorías por categoría
   const subcategoriasPorCategoria: { [key: string]: SubcategoriaItem[] } = {
     Mujer: [
-      { nombre: "Abrigos y Blazers", imagen: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=100&height=auto&aspect=true", path: "/catalogo/mujer?subcategoria=abrigos" },
+      { nombre: "Abrigos y Blazers", imagen: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=100&height=auto&aspect=true", path: "/abrigos-blazers" },
       { nombre: "Blusas", imagen: "https://topitop.vtexassets.com/arquivos/ids/395070/3157704_1.jpg?v=638987600808370000", path: "/catalogo/mujer?subcategoria=blusas" },
       { nombre: "Casacas", imagen: "https://topitop.vtexassets.com/arquivos/ids/395543/3172280_1.jpg?v=638992488017270000", path: "/catalogo/mujer?subcategoria=casacas" },
       { nombre: "Chalecos", imagen: "https://topitop.vtexassets.com/arquivos/ids/395547-500-auto?v=638992488445030000&width=100&height=auto&aspect=true", path: "/catalogo/mujer?subcategoria=chalecos" },
