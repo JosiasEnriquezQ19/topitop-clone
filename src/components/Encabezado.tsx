@@ -26,6 +26,7 @@ export const Encabezado = ({ variant = 'default' }: EncabezadoProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [menuTimeout, setMenuTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [usuario, setUsuario] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +35,27 @@ export const Encabezado = ({ variant = 'default' }: EncabezadoProps) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Cargar usuario del localStorage
+    const usuarioGuardado = localStorage.getItem('usuario');
+    if (usuarioGuardado) {
+      setUsuario(JSON.parse(usuarioGuardado));
+    }
+
+    // Escuchar cambios de autenticación
+    const handleStorageChange = () => {
+      const usuarioActualizado = localStorage.getItem('usuario');
+      if (usuarioActualizado) {
+        setUsuario(JSON.parse(usuarioActualizado));
+      } else {
+        setUsuario(null);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const handleMenuEnter = (categoryName: string) => {
@@ -128,10 +150,17 @@ export const Encabezado = ({ variant = 'default' }: EncabezadoProps) => {
               <Button variant="ghost" size="icon" className="hover:bg-white/10 h-9 w-9 lg:h-10 lg:w-10">
                 <Truck className="w-4 h-4 lg:w-5 lg:h-5" />
               </Button>
-              <MenuUsuario>
-                <Button variant="ghost" size="icon" className="hover:bg-white/10 h-9 w-9 lg:h-10 lg:w-10">
-                  <User className="w-4 h-4 lg:w-5 lg:h-5" />
-                </Button>
+              <MenuUsuario usuario={usuario} setUsuario={setUsuario}>
+                {usuario ? (
+                  <Button variant="ghost" className={`hover:bg-white/10 h-9 lg:h-10 px-3 flex items-center gap-2 ${textColorClass}`}>
+                    <User className="w-4 h-4 lg:w-5 lg:h-5" />
+                    <span className="hidden lg:inline text-sm font-medium">Hola, {usuario.nombre}</span>
+                  </Button>
+                ) : (
+                  <Button variant="ghost" size="icon" className="hover:bg-white/10 h-9 w-9 lg:h-10 lg:w-10">
+                    <User className="w-4 h-4 lg:w-5 lg:h-5" />
+                  </Button>
+                )}
               </MenuUsuario>
               <CarritoLateral>
                 <Button variant="ghost" size="icon" className="relative hover:bg-white/10 h-9 w-9 lg:h-10 lg:w-10">
