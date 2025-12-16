@@ -16,7 +16,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-export const Encabezado = () => {
+interface EncabezadoProps {
+  variant?: 'default' | 'solid';
+}
+
+export const Encabezado = ({ variant = 'default' }: EncabezadoProps) => {
   const { cartCount } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -57,19 +61,23 @@ export const Encabezado = () => {
     { name: "Ayuda", path: "/ayuda" },
   ];
 
-  const textColorClass = isScrolled ? "text-black" : "text-white";
-  const borderColorClass = isScrolled ? "border-black" : "border-white";
-  const placeholderClass = isScrolled ? "placeholder:text-gray-500" : "placeholder:text-white/80";
+  const isSolid = variant === 'solid' || isScrolled;
+  const textColorClass = isSolid ? "text-black" : "text-white";
+  const borderColorClass = isSolid ? "border-black" : "border-white";
+  const placeholderClass = isSolid ? "placeholder:text-gray-500" : "placeholder:text-white/80";
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled ? "bg-white shadow-sm" : "bg-transparent"
-        }`}
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        variant === 'solid' ? 'bg-white shadow-sm' : (isScrolled ? "bg-white shadow-sm" : "bg-transparent")
+      }`}
     >
       {/* Promo Banner */}
-      <div className={`bg-black text-white text-center py-2 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase transition-all duration-300 overflow-hidden ${isScrolled ? 'h-0 py-0 opacity-0' : 'h-auto opacity-100'}`}>
-        Envío gratis por compras mayores a S/139
-      </div>
+      {variant !== 'solid' && (
+        <div className={`bg-black text-white text-center py-2 text-[9px] sm:text-[10px] font-bold tracking-widest uppercase transition-all duration-300 overflow-hidden ${isScrolled ? 'h-0 py-0 opacity-0' : 'h-auto opacity-100'}`}>
+          Envío gratis por compras mayores a S/139
+        </div>
+      )}
 
       {/* Main Header */}
       <div className="w-full px-4 sm:px-6 lg:px-12">
@@ -78,7 +86,7 @@ export const Encabezado = () => {
           {/* Left Section: Logo */}
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src={isScrolled ? "/images/logo.png" : "/images/logo-1.png"}
+              src={isSolid ? "/images/logo.png" : "/images/logo-1.png"}
               alt="Topitop"
               className="h-8 sm:h-10 lg:h-12 w-auto object-contain"
             />
