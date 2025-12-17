@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Encabezado } from "@/components/Encabezado";
 import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
-import { FiltrosCatalogo } from "@/components/FiltrosCatalogo";
+import { FiltrosCatalogo, FiltrosState } from "@/components/FiltrosCatalogo";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Loader2 } from "lucide-react";
 import { useProductosPorNombreCategoria } from "@/hooks/use-productos";
@@ -54,7 +54,7 @@ const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = 
 
 const mapProductoBackend = (producto: any) => ({
   id: producto.idProducto,
-  brand: producto.subcategoria?.categoria?.nombre || "Topitop",
+  brand: producto.subcategoria?.nombre || "Topitop",
   name: producto.nombre,
   price: producto.precio,
   originalPrice: producto.precio,
@@ -67,12 +67,22 @@ const Catalogo = () => {
   const { categoria } = useParams<{ categoria: string }>();
   const [searchParams] = useSearchParams();
   const subcategoria = searchParams.get('subcategoria');
-  const [ordenamiento, setOrdenamiento] = useState("relevancia");
+  const [filtros, setFiltros] = useState<FiltrosState>({
+    precioMin: "",
+    precioMax: "",
+    tallas: [],
+    marcas: [],
+    ordenamiento: "relevancia",
+  });
 
   const categoriaActual = categoria || "outlet";
   const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActual] || "Outlet";
   
   const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
+
+  const handleFilterChange = (newFiltros: FiltrosState) => {
+    setFiltros(newFiltros);
+  };
 
   if (categoria === 'hombre' && subcategoria === 'camisas') {
     return <Camisas />;
@@ -103,7 +113,44 @@ const Catalogo = () => {
   }
 
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.outlet;
-  const productos = productosBackend ? productosBackend.map(mapProductoBackend) : [];
+  const productosRaw = productosBackend ? productosBackend.map(mapProductoBackend) : [];
+
+  const productosFiltrados = useMemo(() => {
+    let resultado = [...productosRaw];
+
+    if (filtros.precioMin) {
+      resultado = resultado.filter(p => p.price >= parseFloat(filtros.precioMin));
+    }
+    if (filtros.precioMax) {
+      resultado = resultado.filter(p => p.price <= parseFloat(filtros.precioMax));
+    }
+
+    if (filtros.marcas.length > 0) {
+      resultado = resultado.filter(p => 
+        filtros.marcas.some(marca => 
+          p.brand.toLowerCase().includes(marca.toLowerCase()) ||
+          p.name.toLowerCase().includes(marca.toLowerCase())
+        )
+      );
+    }
+
+    switch (filtros.ordenamiento) {
+      case "precio-menor":
+        resultado.sort((a, b) => a.price - b.price);
+        break;
+      case "precio-mayor":
+        resultado.sort((a, b) => b.price - a.price);
+        break;
+      case "nombre":
+        resultado.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      default:
+        break;
+    }
+
+    return resultado;
+  }, [productosRaw, filtros]);
+
   const isDenim = categoriaActual === "denim";
 
   return (
@@ -211,7 +258,7 @@ const Catalogo = () => {
 
       <div className={`container mx-auto px-4 sm:px-6 pb-16 ${isDenim ? 'pt-8' : ''}`}>
         <div className="flex gap-8">
-          {!isDenim && <FiltrosCatalogo />}
+          {!isDenim && <FiltrosCatalogo onFilterChange={handleFilterChange} />}
 
           <div className="flex-1">
             {!isDenim && (
@@ -220,24 +267,9 @@ const Catalogo = () => {
                   {isLoading ? (
                     "Cargando productos..."
                   ) : (
-                    <>Mostrando <span className="font-semibold">{productos.length}</span> productos</>
+                    <>Mostrando <span className="font-semibold">{productosFiltrados.length}</span> productos</>
                   )}
                 </p>
-
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-gray-600">Ordenar por:</span>
-                  <select
-                    value={ordenamiento}
-                    onChange={(e) => setOrdenamiento(e.target.value)}
-                    className="border border-gray-300 rounded px-4 py-2 text-sm focus:outline-none focus:border-black"
-                  >
-                    <option value="relevancia">Relevancia</option>
-                    <option value="menor-precio">Menor precio</option>
-                    <option value="mayor-precio">Mayor precio</option>
-                    <option value="descuento">Mayor descuento</option>
-                    <option value="nuevos">Más nuevos</option>
-                  </select>
-                </div>
               </div>
             )}
 
@@ -251,19 +283,19 @@ const Catalogo = () => {
                 <p className="text-red-500 mb-2">Error al cargar los productos</p>
                 <p className="text-gray-500 text-sm">Verifica que el servidor backend esté ejecutándose</p>
               </div>
-            ) : productos.length === 0 ? (
+            ) : productosFiltrados.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-20">
-                <p className="text-gray-500">No se encontraron productos en esta categoría</p>
+                <p className="text-gray-500">No se encontraron productos con los filtros seleccionados</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {productos.map((producto) => (
+                {productosFiltrados.map((producto) => (
                   <TarjetaProductoHover key={producto.id} {...producto} />
                 ))}
               </div>
             )}
 
-            {productos.length > 0 && (
+            {productosFiltrados.length > 0 && (
               <div className="flex justify-center items-center gap-2 mt-12">
                 <Button variant="outline" size="sm" disabled>
                   Anterior

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,39 +9,44 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-interface FiltrosCatalogoProps {
-  onFilterChange?: (filters: any) => void;
+export interface FiltrosState {
+  precioMin: string;
+  precioMax: string;
+  tallas: string[];
+  marcas: string[];
+  ordenamiento: string;
 }
 
-export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
+interface FiltrosCatalogoProps {
+  onFilterChange?: (filters: FiltrosState) => void;
+  marcasDisponibles?: string[];
+}
+
+export const FiltrosCatalogo = ({ onFilterChange, marcasDisponibles }: FiltrosCatalogoProps) => {
   const [precioMin, setPrecioMin] = useState("");
   const [precioMax, setPrecioMax] = useState("");
   const [tallaSeleccionada, setTallaSeleccionada] = useState<string[]>([]);
-  const [colorSeleccionado, setColorSeleccionado] = useState<string[]>([]);
   const [marcaSeleccionada, setMarcaSeleccionada] = useState<string[]>([]);
+  const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  const tallas = ["XS", "S", "M", "L", "XL", "XXL"];
-  const colores = [
-    { nombre: "Negro", hex: "#000000" },
-    { nombre: "Blanco", hex: "#FFFFFF" },
-    { nombre: "Azul", hex: "#1E40AF" },
-    { nombre: "Rojo", hex: "#DC2626" },
-    { nombre: "Rosa", hex: "#EC4899" },
-    { nombre: "Verde", hex: "#059669" },
-    { nombre: "Amarillo", hex: "#EAB308" },
-    { nombre: "Gris", hex: "#6B7280" },
-  ];
-  const marcas = ["Xiomi", "Topitop", "Hawk", "Basic Man", "Basic Woman", "Denim"];
+  const tallas = ["XS", "S", "M", "L", "XL", "XXL", "26", "28", "30", "32", "34", "36"];
+  const marcas = marcasDisponibles || ["Topitop", "Xiomi", "Hawk", "Topitop Mujer", "Topitop Hombre", "Topitop Kids"];
+
+  useEffect(() => {
+    if (onFilterChange) {
+      onFilterChange({
+        precioMin,
+        precioMax,
+        tallas: tallaSeleccionada,
+        marcas: marcaSeleccionada,
+        ordenamiento,
+      });
+    }
+  }, [precioMin, precioMax, tallaSeleccionada, marcaSeleccionada, ordenamiento]);
 
   const toggleTalla = (talla: string) => {
     setTallaSeleccionada((prev) =>
       prev.includes(talla) ? prev.filter((t) => t !== talla) : [...prev, talla]
-    );
-  };
-
-  const toggleColor = (color: string) => {
-    setColorSeleccionado((prev) =>
-      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
     );
   };
 
@@ -55,13 +60,12 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
     setPrecioMin("");
     setPrecioMax("");
     setTallaSeleccionada([]);
-    setColorSeleccionado([]);
     setMarcaSeleccionada([]);
+    setOrdenamiento("relevancia");
   };
 
   const FiltrosContent = () => (
     <div className="space-y-6">
-      {/* Precio */}
       <div className="border-b border-gray-200 pb-6">
         <button className="flex items-center justify-between w-full text-left font-semibold text-sm mb-4">
           Precio
@@ -92,13 +96,12 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
         </div>
       </div>
 
-      {/* Tallas */}
       <div className="border-b border-gray-200 pb-6">
         <button className="flex items-center justify-between w-full text-left font-semibold text-sm mb-4">
           Talla
           <ChevronDown className="w-4 h-4" />
         </button>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-4 gap-2">
           {tallas.map((talla) => (
             <button
               key={talla}
@@ -115,37 +118,6 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
         </div>
       </div>
 
-      {/* Colores */}
-      <div className="border-b border-gray-200 pb-6">
-        <button className="flex items-center justify-between w-full text-left font-semibold text-sm mb-4">
-          Color
-          <ChevronDown className="w-4 h-4" />
-        </button>
-        <div className="grid grid-cols-4 gap-3">
-          {colores.map((color) => (
-            <button
-              key={color.nombre}
-              onClick={() => toggleColor(color.nombre)}
-              className="flex flex-col items-center gap-2"
-            >
-              <div
-                className={`w-10 h-10 rounded-full border-2 transition-all ${
-                  colorSeleccionado.includes(color.nombre)
-                    ? "border-black scale-110"
-                    : "border-gray-300"
-                }`}
-                style={{
-                  backgroundColor: color.hex,
-                  boxShadow: color.nombre === "Blanco" ? "inset 0 0 0 1px #e5e7eb" : "none",
-                }}
-              />
-              <span className="text-xs text-gray-600">{color.nombre}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Marcas */}
       <div className="border-b border-gray-200 pb-6">
         <button className="flex items-center justify-between w-full text-left font-semibold text-sm mb-4">
           Marca
@@ -166,7 +138,24 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
         </div>
       </div>
 
-      {/* Botón limpiar filtros */}
+      <div className="border-b border-gray-200 pb-6">
+        <button className="flex items-center justify-between w-full text-left font-semibold text-sm mb-4">
+          Ordenar por
+          <ChevronDown className="w-4 h-4" />
+        </button>
+        <select
+          value={ordenamiento}
+          onChange={(e) => setOrdenamiento(e.target.value)}
+          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-black"
+        >
+          <option value="relevancia">Relevancia</option>
+          <option value="precio-menor">Menor precio</option>
+          <option value="precio-mayor">Mayor precio</option>
+          <option value="nombre">Nombre A-Z</option>
+          <option value="nuevos">Más nuevos</option>
+        </select>
+      </div>
+
       <Button
         onClick={limpiarFiltros}
         variant="outline"
@@ -179,7 +168,6 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <aside className="hidden lg:block w-64 flex-shrink-0">
         <div className="sticky top-24">
           <div className="bg-white border border-gray-200 rounded-lg p-6">
@@ -192,7 +180,6 @@ export const FiltrosCatalogo = ({ onFilterChange }: FiltrosCatalogoProps) => {
         </div>
       </aside>
 
-      {/* Mobile Filter Button & Sheet */}
       <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
         <Sheet>
           <SheetTrigger asChild>
