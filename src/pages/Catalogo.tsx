@@ -25,6 +25,33 @@ const mapCategoriaBackendToFrontend: { [key: string]: string } = {
   outlet: "Outlet",
 };
 
+const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
+  mujer: {
+    titulo: "Moda Mujer",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png",
+  },
+  hombre: {
+    titulo: "Moda Hombre",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/f5e9cc42-0c58-46f1-b0e0-ff00e870d64f___1ca792e01845d6a502b5e0412b09e723.png",
+  },
+  infantil: {
+    titulo: "Moda Infantil",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/e759185c-e357-4c48-b224-c84a426e2873___47250bb4fc92c33dc02acdbd25fd3022.png",
+  },
+  denim: {
+    titulo: "Colección Denim",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.png",
+  },
+  basicos: {
+    titulo: "Básicos Esenciales",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/0b3428ba-89eb-4d6a-9fc5-1eceae228f2f___aa9969c4000aa95e5bcf2bd104ed9aa2.png",
+  },
+  outlet: {
+    titulo: "Outlet",
+    imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.png"
+  }
+};
+
 const mapProductoBackend = (producto: any) => ({
   id: producto.idProducto,
   brand: producto.subcategoria?.categoria?.nombre || "Topitop",
@@ -42,6 +69,11 @@ const Catalogo = () => {
   const subcategoria = searchParams.get('subcategoria');
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
+  const categoriaActual = categoria || "outlet";
+  const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActual] || "Outlet";
+  
+  const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
+
   if (categoria === 'hombre' && subcategoria === 'camisas') {
     return <Camisas />;
   }
@@ -58,7 +90,6 @@ const Catalogo = () => {
     return <CatalogoMujer />;
   }
 
-
   if (categoria === 'infantil' && !subcategoria) {
     return <CatalogoInfantil />;
   }
@@ -71,41 +102,8 @@ const Catalogo = () => {
     return <CatalogoBasicos />;
   }
 
-  const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
-    mujer: {
-      titulo: "Moda Mujer",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png",
-    },
-    hombre: {
-      titulo: "Moda Hombre",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/f5e9cc42-0c58-46f1-b0e0-ff00e870d64f___1ca792e01845d6a502b5e0412b09e723.png",
-    },
-    infantil: {
-      titulo: "Moda Infantil",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/e759185c-e357-4c48-b224-c84a426e2873___47250bb4fc92c33dc02acdbd25fd3022.png",
-    },
-    denim: {
-      titulo: "Colección Denim",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.png",
-    },
-    basicos: {
-      titulo: "Básicos Esenciales",
-      imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/0b3428ba-89eb-4d6a-9fc5-1eceae228f2f___aa9969c4000aa95e5bcf2bd104ed9aa2.png",
-    },
-    outlet: {
-       titulo: "Outlet",
-       imagen: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.png"
-    }
-  };
-
-  const categoriaActual = categoria || "mujer";
-  const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
-
-  const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActual] || "";
-  const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
-
+  const banner = bannersCategoria[categoriaActual] || bannersCategoria.outlet;
   const productos = productosBackend ? productosBackend.map(mapProductoBackend) : [];
-
   const isDenim = categoriaActual === "denim";
 
   return (
