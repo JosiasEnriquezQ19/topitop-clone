@@ -58,7 +58,7 @@ export function CatalogoHombre() {
         <Encabezado variant="solid" />
         <div className="container mx-auto px-4 py-8 mt-16">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Moda Hombre</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Hombre</h1>
             <p className="text-gray-600">Cargando productos desde el servidor...</p>
           </div>
           
@@ -112,7 +112,7 @@ export function CatalogoHombre() {
             <div className="flex justify-center mb-4">
               <ShoppingBag className="h-12 w-12 text-gray-400" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Moda Hombre</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Hombre</h1>
             <p className="text-gray-600">
               No hay productos disponibles en esta categoría en este momento.
             </p>
@@ -130,11 +130,11 @@ export function CatalogoHombre() {
       <div className="relative h-[500px] bg-gray-200 flex items-center overflow-hidden mt-16">
         <img
           src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/f5e9cc42-0c58-46f1-b0e0-ff00e870d64f___1ca792e01845d6a502b5e0412b09e723.png"
-          alt="Moda Hombre"
+          alt="Hombre"
           className="absolute inset-0 w-full h-full object-cover object-center"
         />
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="text-6xl font-bold text-white max-w-xl">Moda Hombre</h1>
+          <h1 className="text-6xl font-bold text-black max-w-xl">Hombre</h1>
         </div>
       </div>
 

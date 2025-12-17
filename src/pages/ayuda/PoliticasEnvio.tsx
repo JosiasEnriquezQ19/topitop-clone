@@ -5,8 +5,8 @@ import { Truck, Clock, MapPin } from "lucide-react";
 const PoliticasEnvio = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <Encabezado variant="solid" />
+      <div className="container mx-auto px-4 py-12 max-w-3xl mt-16">
         <h1 className="text-3xl font-bold mb-8 text-center uppercase">Políticas de Envío</h1>
         
         <div className="grid md:grid-cols-3 gap-8 mb-12">

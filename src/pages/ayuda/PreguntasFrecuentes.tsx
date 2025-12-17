@@ -5,8 +5,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const PreguntasFrecuentes = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
-      <div className="container mx-auto px-4 py-12 max-w-3xl">
+      <Encabezado variant="solid" />
+      <div className="container mx-auto px-4 py-12 max-w-3xl mt-16">
         <h1 className="text-3xl font-bold mb-8 text-center uppercase">Preguntas Frecuentes</h1>
         
         <Accordion type="single" collapsible className="w-full">

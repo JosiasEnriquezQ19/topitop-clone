@@ -5,8 +5,8 @@ import { RefreshCw, CheckCircle, XCircle } from "lucide-react";
 const CambiosDevoluciones = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <Encabezado variant="solid" />
+      <div className="container mx-auto px-4 py-12 max-w-3xl mt-16">
         <h1 className="text-3xl font-bold mb-8 text-center uppercase">Cambios y Devoluciones</h1>
         
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 mb-8 flex items-start gap-6">

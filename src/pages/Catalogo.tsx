@@ -42,34 +42,19 @@ const Catalogo = () => {
   const subcategoria = searchParams.get('subcategoria');
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  if (categoria === 'hombre' && subcategoria === 'camisas') {
-    return <Camisas />;
-  }
-  
-  if (categoria === 'mujer' && subcategoria === 'abrigos-blazers') {
-    return <AbrigosBlazers />;
-  }
+  // IMPORTANTE: Llamar a TODOS los hooks ANTES de cualquier early return
+  const categoriaActualTemp = categoria || "mujer";
+  const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActualTemp] || "";
+  const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
 
-  if (categoria === 'hombre' && !subcategoria) {
-    return <CatalogoHombre />;
-  }
-
-  if (categoria === 'mujer' && !subcategoria) {
-    return <CatalogoMujer />;
-  }
-
-
-  if (categoria === 'infantil' && !subcategoria) {
-    return <CatalogoInfantil />;
-  }
-
-  if (categoria === 'denim' && !subcategoria) {
-    return <CatalogoDenim />;
-  }
-
-  if (categoria === 'basicos' && !subcategoria) {
-    return <CatalogoBasicos />;
-  }
+  // Ahora SÍ podemos hacer early returns de forma segura
+  if (categoria === 'hombre' && subcategoria === 'camisas') return <Camisas />;
+  if (categoria === 'mujer' && subcategoria === 'abrigos-blazers') return <AbrigosBlazers />;
+  if (categoria === 'hombre' && !subcategoria) return <CatalogoHombre />;
+  if (categoria === 'mujer' && !subcategoria) return <CatalogoMujer />;
+  if (categoria === 'infantil' && !subcategoria) return <CatalogoInfantil />;
+  if (categoria === 'denim' && !subcategoria) return <CatalogoDenim />;
+  if (categoria === 'basicos' && !subcategoria) return <CatalogoBasicos />;
 
   const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
     mujer: {
@@ -101,9 +86,7 @@ const Catalogo = () => {
   const categoriaActual = categoria || "mujer";
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
 
-  const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActual] || "";
-  const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
-
+  // Hook ya fue llamado al inicio del componente, aquí solo procesamos los datos
   const productos = productosBackend ? productosBackend.map(mapProductoBackend) : [];
 
   const isDenim = categoriaActual === "denim";

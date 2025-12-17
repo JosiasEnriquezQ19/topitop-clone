@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input";
 const SeguimientoPedidos = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
-      <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <Encabezado variant="solid" />
+      <div className="container mx-auto px-4 py-12 max-w-3xl mt-16">
         <h1 className="text-3xl font-bold mb-2 text-center">SEGUIMIENTO DE PEDIDO</h1>
         <p className="text-center text-gray-500 mb-12">Ingresa el número de tu pedido para ver su estado actual.</p>
         
