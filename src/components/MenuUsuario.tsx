@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "@/lib/api-client";
+import { useCart } from "@/context/CartContext";
 
 interface UserMenuProps {
     children: ReactNode;
@@ -38,6 +39,7 @@ interface AuthResponse {
 }
 
 export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) => {
+    const { loadCart } = useCart();
     const navigate = useNavigate();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
@@ -56,11 +58,13 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
     const [showPassword, setShowPassword] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-    const handleCerrarSesion = () => {
+    const handleCerrarSesion = async () => {
         localStorage.removeItem('authToken');
         localStorage.removeItem('usuario');
+        localStorage.removeItem('cart'); // Limpiar carrito local
         setUsuario(null);
         setIsPopoverOpen(false);
+        await loadCart(); // Limpiar carrito en contexto
         window.location.reload();
     };
 
@@ -111,6 +115,7 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
             localStorage.setItem('authToken', response.data.token);
             localStorage.setItem('usuario', JSON.stringify(response.data.usuario));
             setUsuario(response.data.usuario);
+            await loadCart(); // Cargar carrito del usuario
             setIsDialogOpen(false);
             setIsPopoverOpen(false);
         } catch (err: any) {
@@ -148,6 +153,7 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
             const response = await apiClient.post<AuthResponse>('/api/auth/registro', requestData);
             localStorage.setItem('authToken', response.data.token);
             localStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+            await loadCart(); // Cargar carrito del usuario
             setUsuario(response.data.usuario);
             setIsDialogOpen(false);
             setIsPopoverOpen(false);
@@ -253,7 +259,7 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
             </Popover>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-md" aria-describedby={undefined}>
                     <DialogHeader>
                         <DialogTitle className="text-center text-xl">
                             {activeTab === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}

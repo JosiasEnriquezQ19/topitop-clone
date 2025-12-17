@@ -8,6 +8,7 @@ export interface AgregarCarritoRequest {
   idProducto: number;
   cantidad: number;
   precioUnitario: number;
+  talla?: string;
 }
 
 export interface ActualizarCarritoRequest {

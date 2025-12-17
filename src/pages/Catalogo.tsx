@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Encabezado } from "@/components/Encabezado";
 import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
@@ -8,6 +8,10 @@ import { FiltrosCatalogo } from "@/components/FiltrosCatalogo";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { useProductosPorCategoria } from "@/hooks/use-productos";
+import { Camisas } from "./Camisas";
+import { AbrigosBlazers } from "./AbrigosBlazers";
+import { CatalogoHombre } from "./CatalogoHombre";
+import { CatalogoMujer } from "./CatalogoMujer";
 
 import productosHombreData from "@/data/productos_hombre.json";
 import productosMujerData from "@/data/productos_mujer.json";
@@ -27,7 +31,28 @@ const mapProductData = (data: any[]) => data.map((item) => ({
 
 const Catalogo = () => {
   const { categoria } = useParams<{ categoria: string }>();
+  const [searchParams] = useSearchParams();
+  const subcategoria = searchParams.get('subcategoria');
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
+
+  // Si hay subcategoría específica, renderizar el componente correspondiente
+  if (categoria === 'hombre' && subcategoria === 'camisas') {
+    return <Camisas />;
+  }
+  
+  if (categoria === 'mujer' && subcategoria === 'abrigos-blazers') {
+    return <AbrigosBlazers />;
+  }
+
+  // Si es la categoría completa de hombre (sin subcategoría), usar el nuevo diseño
+  if (categoria === 'hombre' && !subcategoria) {
+    return <CatalogoHombre />;
+  }
+
+  // Si es la categoría completa de mujer (sin subcategoría), usar el nuevo diseño
+  if (categoria === 'mujer' && !subcategoria) {
+    return <CatalogoMujer />;
+  }
 
   // Configuración de banner por categoría
   const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
@@ -60,16 +85,34 @@ const Catalogo = () => {
   const categoriaActual = categoria || "mujer";
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
 
-  // Hook para obtener productos de Mujer desde el backend
+  // Hook para obtener productos desde el backend
   // Subcategorías de Mujer: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
+  // Subcategorías de Hombre: 5 = Polos, 6 = Camisas, 7 = Bermudas, 8 = Blazers
   const { data: productosBackendMujer, isLoading: cargandoMujer } = useProductosPorCategoria(
     categoriaActual === "mujer" ? [1, 2, 3, 4] : []
+  );
+
+  const { data: productosBackendHombre, isLoading: cargandoHombre } = useProductosPorCategoria(
+    categoriaActual === "hombre" ? [5, 6, 7, 8] : []
   );
 
   // Select products based on category
   let rawProducts = [];
   if (categoriaActual === "hombre") {
-    rawProducts = productosHombreData;
+    // Usar productos del backend para Hombre
+    if (productosBackendHombre && productosBackendHombre.length > 0) {
+      rawProducts = productosBackendHombre.map((p: any) => ({
+        code: p.idProducto,
+        brand: "Topitop hombre",
+        name: p.nombre,
+        price: p.precio,
+        image: p.imagenUrl || "https://via.placeholder.com/300x400",
+        sizes: ["S", "M", "L", "XL"],
+      }));
+    } else if (!cargandoHombre) {
+      // Si no hay datos del backend y terminó de cargar, usar JSON local
+      rawProducts = productosHombreData;
+    }
   } else if (categoriaActual === "mujer") {
     // Usar productos del backend si están disponibles
     if (productosBackendMujer && productosBackendMujer.length > 0) {

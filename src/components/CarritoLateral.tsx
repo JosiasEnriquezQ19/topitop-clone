@@ -11,6 +11,10 @@ interface CarritoLateralProps {
 export const CarritoLateral = ({ children }: CarritoLateralProps) => {
     const { cartItems, removeFromCart, updateQuantity, isCartOpen, setIsCartOpen } = useCart();
 
+    // Verificar si el usuario está logueado
+    const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
+    const isLoggedIn = !!usuario.idUsuario;
+
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const total = subtotal;
 
@@ -36,7 +40,14 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                     </div>
 
                     {/* Body */}
-                    {cartItems.length === 0 ? (
+                    {!isLoggedIn ? (
+                        /* Not Logged In State */
+                        <div className="flex-1 flex flex-col items-center justify-center gap-4 bg-white px-6">
+                            <ShoppingCart className="w-20 h-20 text-gray-400 fill-gray-400/20" />
+                            <p className="text-gray-900 text-lg font-semibold text-center">Inicia sesión para ver tu carrito</p>
+                            <p className="text-gray-500 text-sm text-center">Debes estar registrado para agregar productos al carrito</p>
+                        </div>
+                    ) : cartItems.length === 0 ? (
                         /* Empty State */
                         <div className="flex-1 flex flex-col items-center justify-center gap-4 bg-white">
                             <ShoppingCart className="w-20 h-20 text-gray-400 fill-gray-400/20" />
@@ -47,7 +58,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                         <>
                             <div className="flex-1 overflow-y-auto px-4 py-4">
                                 {cartItems.map((item) => (
-                                    <div key={`${item.id}-${item.size}`} className="flex gap-4 pb-4 mb-4 border-b border-gray-100">
+                                    <div key={item.detalleId || `${item.id}-${item.size}`} className="flex gap-4 pb-4 mb-4 border-b border-gray-100">
                                         {/* Product Image */}
                                         <div className="w-20 h-28 flex-shrink-0 bg-gray-50 border border-gray-200">
                                             <img
@@ -68,7 +79,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                                                     <p className="text-xs text-gray-500 mt-1">Talla: {item.size}</p>
                                                 </div>
                                                 <button
-                                                    onClick={() => removeFromCart(item.id)}
+                                                    onClick={() => item.detalleId && removeFromCart(item.detalleId)}
                                                     className="text-red-500 hover:text-red-700 p-1"
                                                 >
                                                     <Trash2 className="w-4 h-4" />
@@ -89,7 +100,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                                             <div className="flex items-center mt-3">
                                                 <div className="flex items-center border border-gray-300">
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                                        onClick={() => item.detalleId && updateQuantity(item.detalleId, item.quantity - 1)}
                                                         className="px-2 py-1 hover:bg-gray-100"
                                                     >
                                                         <Minus className="w-3 h-3" />
@@ -98,7 +109,7 @@ export const CarritoLateral = ({ children }: CarritoLateralProps) => {
                                                         {item.quantity}
                                                     </span>
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                        onClick={() => item.detalleId && updateQuantity(item.detalleId, item.quantity + 1)}
                                                         className="px-2 py-1 hover:bg-gray-100"
                                                     >
                                                         <Plus className="w-3 h-3" />

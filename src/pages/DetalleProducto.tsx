@@ -5,13 +5,13 @@ import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { Button } from "@/components/ui/button";
 import { Heart, Minus, Plus, ChevronDown, Facebook, Phone, Link2 } from "lucide-react";
-import { getProductById } from "@/data/products";
+import { useProducto } from "@/hooks/use-productos";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
 
 const DetalleProducto = () => {
   const { id } = useParams();
-  const product = getProductById(id || "1");
+  const { data: product, isLoading, error } = useProducto(Number(id));
   const { addToCart } = useCart();
 
   const [selectedSize, setSelectedSize] = useState("");
@@ -19,7 +19,20 @@ const DetalleProducto = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
 
-  if (!product) {
+  // Tallas disponibles por defecto (ya que dejamos talla como fint)
+  const tallasDisponibles = ["XS", "S", "M", "L", "XL"];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-xl">Cargando producto...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
@@ -35,24 +48,31 @@ const DetalleProducto = () => {
     setOpenSection(openSection === section ? null : section);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    // Verificar si el usuario está logueado
+    const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
+    if (!usuario.idUsuario) {
+      toast.error("Debes iniciar sesión para agregar productos al carrito", {
+        duration: 3000,
+      });
+      return;
+    }
+
     if (!selectedSize) {
       toast.error("Por favor selecciona una talla");
       return;
     }
 
-    addToCart({
-      id: product.id,
-      brand: product.brand,
-      name: product.name,
+    await addToCart({
+      id: product.idProducto.toString(),
+      brand: "Topitop",
+      name: product.nombre,
       size: selectedSize,
-      price: product.price,
-      originalPrice: product.originalPrice,
+      price: product.precio,
+      originalPrice: undefined,
       quantity: quantity,
-      image: product.image,
+      image: product.imagenUrl || "https://via.placeholder.com/300x400",
     });
-
-    toast.success("Agregado al carrito");
   };
 
   return (
@@ -76,8 +96,8 @@ const DetalleProducto = () => {
           {/* Left - Product Image */}
           <div className="relative">
             <img
-              src={product.images?.[0] || product.image}
-              alt={product.name}
+              src={product.imagenUrl || "https://via.placeholder.com/300x400"}
+              alt={product.nombre}
               className="w-full h-auto object-cover"
             />
           </div>
@@ -86,7 +106,7 @@ const DetalleProducto = () => {
           <div className="lg:pl-8">
             {/* Brand & Wishlist */}
             <div className="flex items-start justify-between mb-2">
-              <span className="text-sm text-gray-500">{product.brand}</span>
+              <span className="text-sm text-gray-500">Topitop</span>
               <button
                 onClick={() => setIsLiked(!isLiked)}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -99,25 +119,15 @@ const DetalleProducto = () => {
 
             {/* Product Name */}
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
-              {product.name}
+              {product.nombre}
             </h1>
 
             {/* Code */}
-            <p className="text-sm text-gray-500 mb-4">Código: {product.code}</p>
+            <p className="text-sm text-gray-500 mb-4">Código: {product.idProducto}</p>
 
             {/* Price */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-2xl sm:text-3xl font-bold">S/ {product.price.toFixed(2)}</span>
-              {product.originalPrice && (
-                <span className="text-lg text-gray-400 line-through">
-                  S/ {product.originalPrice.toFixed(2)}
-                </span>
-              )}
-              {product.discount && (
-                <span className="bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
-                  -{product.discount}%
-                </span>
-              )}
+              <span className="text-2xl sm:text-3xl font-bold">S/ {product.precio.toFixed(2)}</span>
             </div>
 
             {/* Size Selector */}
@@ -126,7 +136,7 @@ const DetalleProducto = () => {
                 <span className="text-sm font-medium">Talla</span>
               </div>
               <div className="flex gap-2">
-                {product.sizes.map((size: string) => (
+                {tallasDisponibles.map((size: string) => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
@@ -188,7 +198,7 @@ const DetalleProducto = () => {
               </button>
               {openSection === "description" && (
                 <div className="py-4 text-sm text-gray-600 border-b border-gray-200">
-                  {product.description}
+                  {product.descripcion || "Información no disponible"}
                 </div>
               )}
 
@@ -206,7 +216,7 @@ const DetalleProducto = () => {
               </button>
               {openSection === "model" && (
                 <div className="py-4 text-sm text-gray-600 border-b border-gray-200">
-                  {product.modelInfo}
+                  Información del modelo no disponible
                 </div>
               )}
             </div>

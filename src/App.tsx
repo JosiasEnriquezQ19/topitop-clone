@@ -12,6 +12,7 @@ import ProductosAPI from "./pages/ProductosAPI";
 import { BotonWhatsApp } from "./components/BotonWhatsApp";
 import APIDebugger from "./components/APIDebugger";
 import { AbrigosBlazers } from "./pages/AbrigosBlazers";
+import { Camisas } from "./pages/Camisas";
 
 import SeguimientoPedidos from "./pages/ayuda/SeguimientoPedidos";
 import PoliticasEnvio from "./pages/ayuda/PoliticasEnvio";
@@ -57,6 +58,7 @@ const App = () => (
           <Route path="/test-api" element={<TestAPI />} />
           <Route path="/productos-api" element={<ProductosAPI />} />
           <Route path="/abrigos-blazers" element={<AbrigosBlazers />} />
+          <Route path="/camisas" element={<Camisas />} />
           <Route path="/catalogo/:categoria" element={<Catalogo />} />
           <Route path="/producto/:id" element={<DetalleProducto />} />
 

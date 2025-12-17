@@ -42,8 +42,8 @@ export const useProductosPorSubcategoria = (subcategoriaId: number) => {
     queryKey: [...PRODUCTO_KEYS.all, 'subcategoria', subcategoriaId],
     queryFn: () => ProductoService.obtenerProductosPorSubcategoria(subcategoriaId),
     enabled: !!subcategoriaId,
-    staleTime: 0, // Sin caché - siempre traer datos frescos
-    gcTime: 0, // No guardar en garbage collection
+    staleTime: 5 * 60 * 1000, // 5 minutos de caché
+    gcTime: 10 * 60 * 1000, // 10 minutos en garbage collection
   });
 };
 
@@ -79,7 +79,7 @@ export const useProductosPorCategoria = (subcategoriaIds: number[]) => {
       return resultados.flat();
     },
     enabled: subcategoriaIds.length > 0,
-    staleTime: 0, // Sin caché
-    gcTime: 0,
+    staleTime: 5 * 60 * 1000, // 5 minutos de caché
+    gcTime: 10 * 60 * 1000, // 10 minutos en garbage collection
   });
 };
