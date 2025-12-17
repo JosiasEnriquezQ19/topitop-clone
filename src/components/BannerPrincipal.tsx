@@ -11,21 +11,21 @@ export const BannerPrincipal = () => {
       subtitle: "Hasta 60% de descuento",
       description: "En miles de prendas",
       cta: "Comprar ahora",
-      image: "/images/9b2c81ff-6f40-45b1-8776-ae1cfd7faf95___656e2346110ee8be519429fc7bf73ec9.webp",
+      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/5cafa61d-2509-42d7-95c6-bc3b47019876___562aa9d8e8fa0b688d59486635b3f77d.png",
     },
     {
       title: "Prendas de Mujer",
       subtitle: "Hasta 50% de descuento",
       description: "En prendas de mujer",
       cta: "Ver Todo",
-      image: "/images/da2b83a6-1d16-4997-af10-65bf568a22d5___3c6af236b3de35dd9b73d0e5d2ee3645.webp",
+      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/8377efee-5db9-4f61-b0b7-5f0504eb7694___5824c847886226f2648fe10c248ed7aa.png",
     },
     {
       title: "Prendas de Hombre",
       subtitle: "Hasta 50% de descuento",
       description: "En prendas de hombre",
       cta: "Ver Todo",
-      image: "/images/f9f7a057-f58b-4355-a8a2-7e41761bfa97___c523a7e1b115ee603257463d720ef97f.webp",
+      image: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/0a456e5f-93ec-4e3b-b61c-fca85763d60e___0076c754bd13402b0255d00035069d6b.png",
     },
   ];
 
