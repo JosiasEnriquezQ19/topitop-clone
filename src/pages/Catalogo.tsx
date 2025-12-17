@@ -90,39 +90,6 @@ const Catalogo = () => {
   
   const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
 
-  const handleFilterChange = (newFiltros: FiltrosState) => {
-    setFiltros(newFiltros);
-  };
-
-  if (categoria === 'hombre' && subcategoria === 'camisas') {
-    return <Camisas />;
-  }
-  
-  if (categoria === 'mujer' && subcategoria === 'abrigos-blazers') {
-    return <AbrigosBlazers />;
-  }
-
-  if (categoria === 'hombre' && !subcategoria) {
-    return <CatalogoHombre />;
-  }
-
-  if (categoria === 'mujer' && !subcategoria) {
-    return <CatalogoMujer />;
-  }
-
-  if (categoria === 'infantil' && !subcategoria) {
-    return <CatalogoInfantil />;
-  }
-
-  if (categoria === 'denim' && !subcategoria) {
-    return <CatalogoDenim />;
-  }
-
-  if (categoria === 'basicos' && !subcategoria) {
-    return <CatalogoBasicos />;
-  }
-
-  const banner = bannersCategoria[categoriaActual] || bannersCategoria.outlet;
   const productosRaw = productosBackend ? productosBackend.map(mapProductoBackend) : [];
 
   const productosFiltrados = useMemo(() => {
@@ -161,6 +128,39 @@ const Catalogo = () => {
     return resultado;
   }, [productosRaw, filtros]);
 
+  const handleFilterChange = (newFiltros: FiltrosState) => {
+    setFiltros(newFiltros);
+  };
+
+  if (categoria === 'hombre' && subcategoria === 'camisas') {
+    return <Camisas />;
+  }
+  
+  if (categoria === 'mujer' && subcategoria === 'abrigos-blazers') {
+    return <AbrigosBlazers />;
+  }
+
+  if (categoria === 'hombre' && !subcategoria) {
+    return <CatalogoHombre />;
+  }
+
+  if (categoria === 'mujer' && !subcategoria) {
+    return <CatalogoMujer />;
+  }
+
+  if (categoria === 'infantil' && !subcategoria) {
+    return <CatalogoInfantil />;
+  }
+
+  if (categoria === 'denim' && !subcategoria) {
+    return <CatalogoDenim />;
+  }
+
+  if (categoria === 'basicos' && !subcategoria) {
+    return <CatalogoBasicos />;
+  }
+
+  const banner = bannersCategoria[categoriaActual] || bannersCategoria.outlet;
   const isDenim = categoriaActual === "denim";
 
   return (
