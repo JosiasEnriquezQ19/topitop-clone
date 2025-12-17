@@ -2,30 +2,31 @@ export const GaleriaInstagram = () => {
   const images = [
     {
       id: 1,
-      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/6657718e-827c-4857-bb88-11c15cf228c3___fb81b2ad443e1013e1dbb0b6a3ff5a6f.png",
+      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/9d24f4e6-81de-48eb-a232-9a632ff2b766___c8541596a0f553f475f6013ba3333a38.png",
       alt: "Estilo Topitop 1",
     },
     {
       id: 2,
-      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/6cd0c76d-8457-4acb-b848-82fe6cc1097d___4c523c0529b8bdd249a733d30a2a32eb.png",
+      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/4f1db719-5427-401a-b373-7600fb16b87c___cd9d6de0b49ac25d98159ec742706d03.png",
       alt: "Estilo Topitop 2",
     },
     {
       id: 3,
-      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/7aaaf5d2-1e20-46c7-af39-457ba6ad0cc3___c6ae9b9785d97faa384017a7ed426a6f.png",
+      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/a900e0bf-9cc6-4070-9354-c4912e35d260___5062442b2f0f94f19dbe6670a4bb14c8.png",
       alt: "Estilo Topitop 3",
     },
     {
       id: 4,
-      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/3630c1ac-615c-44db-962f-d15c9a4b1c01___99ae65dd560c09246402f480af7c862e.png",
+      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ae1dbc8d-f198-4d1d-b5a6-2521e76a079b___45a53a525135b2a9af338bf683b58d95.png",
       alt: "Estilo Topitop 4",
     },
     {
       id: 5,
-      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/11a490f6-85fc-4f5b-b9f0-7d05e67dbb1f___b62670f0b73b349b56fd848ef0ff2e29.png",
+      src: "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/cdcf4ce4-79b5-49eb-a3c6-fb1c25def96b___6f0cc667b9c74b744bbefef5b72e707c.png",
       alt: "Estilo Topitop 5",
     },
   ];
+
 
   return (
     <section className="py-14 sm:py-20 bg-white mt-10 sm:mt-16">
