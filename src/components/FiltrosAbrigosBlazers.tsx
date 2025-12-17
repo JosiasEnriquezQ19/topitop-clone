@@ -7,6 +7,7 @@ interface FiltrosAbrigosBlazersProps {
   onMarcaChange: (marcas: string[]) => void;
   onTallaChange: (tallas: string[]) => void;
   onOrdenamiento: (valor: string) => void;
+  esInfantil?: boolean;
 }
 
 export function FiltrosAbrigosBlazers({
@@ -15,14 +16,15 @@ export function FiltrosAbrigosBlazers({
   onMarcaChange,
   onTallaChange,
   onOrdenamiento,
+  esInfantil = false,
 }: FiltrosAbrigosBlazersProps) {
   const [todosOpen, setTodosOpen] = useState(false);
   const [marcaOpen, setMarcaOpen] = useState(false);
   const [tallaOpen, setTallaOpen] = useState(false);
   const [ordenOpen, setOrdenOpen] = useState(false);
 
-  const marcas = ['Topitop mujer', 'Xiomi'];
-  const tallas = ['S', 'M', 'L', 'XL'];
+  const marcas = esInfantil ? ['Topitop Kids'] : ['Topitop mujer', 'Xiomi'];
+  const tallas = esInfantil ? ['02', '04', '06', '08', '10', '12', '14'] : ['S', 'M', 'L', 'XL'];
 
   const handleMarcaToggle = (m: string) => {
     if (marca.includes(m)) {

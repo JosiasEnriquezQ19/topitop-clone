@@ -107,6 +107,7 @@ export const CatalogoInfantil = () => {
         onMarcaChange={setMarca}
         onTallaChange={setTalla}
         onOrdenamiento={setOrdenamiento}
+        esInfantil={true}
       />
 
       {/* Productos */}
@@ -133,6 +134,7 @@ export const CatalogoInfantil = () => {
                 price={producto.precio}
                 image={producto.imagenUrl || "https://via.placeholder.com/300x400"}
                 brand="Topitop Kids"
+                sizes={["02", "04", "06", "08", "10", "12", "14"]}
               />
             ))}
           </div>
