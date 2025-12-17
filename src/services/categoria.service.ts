@@ -14,6 +14,16 @@ export class CategoriaService {
     return response.data;
   }
 
+  // Obtener categoría por nombre
+  static async obtenerCategoriaPorNombre(nombre: string): Promise<Categoria | null> {
+    const response = await apiClient.get<Categoria[]>('/api/categorias');
+    const categorias = response.data;
+    const categoria = categorias.find(
+      (c) => c.nombre.toLowerCase() === nombre.toLowerCase()
+    );
+    return categoria || null;
+  }
+
   // Crear nueva categoría
   static async crearCategoria(categoria: Omit<Categoria, 'idCategoria'>): Promise<Categoria> {
     const response = await apiClient.post<Categoria>('/api/categorias', categoria);

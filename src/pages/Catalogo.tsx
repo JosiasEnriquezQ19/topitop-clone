@@ -6,28 +6,32 @@ import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
 import { FiltrosCatalogo } from "@/components/FiltrosCatalogo";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
-import { useProductosPorCategoria } from "@/hooks/use-productos";
+import { ChevronDown, Loader2 } from "lucide-react";
+import { useProductosPorNombreCategoria } from "@/hooks/use-productos";
 import { Camisas } from "./Camisas";
 import { AbrigosBlazers } from "./AbrigosBlazers";
 import { CatalogoHombre } from "./CatalogoHombre";
 import { CatalogoMujer } from "./CatalogoMujer";
 
-import productosHombreData from "@/data/productos_hombre.json";
-import productosMujerData from "@/data/productos_mujer.json";
-import productosInfantilData from "@/data/productos_infantil.json";
+const mapCategoriaBackendToFrontend: { [key: string]: string } = {
+  basicos: "Básicos",
+  denim: "Denim",
+  hombre: "Hombre",
+  infantil: "Infantil",
+  mujer: "Mujer",
+  outlet: "Outlet",
+};
 
-// Helper to map JSON data to component props - use code as ID for proper linking
-const mapProductData = (data: any[]) => data.map((item) => ({
-  id: item.code,
-  brand: item.brand,
-  name: item.name,
-  price: item.price,
-  originalPrice: item.originalPrice,
-  image: item.image,
-  sizes: item.sizes || ["S", "M", "L", "XL"],
-  discount: item.discount,
-}));
+const mapProductoBackend = (producto: any) => ({
+  id: producto.idProducto,
+  brand: producto.subcategoria?.categoria?.nombre || "Topitop",
+  name: producto.nombre,
+  price: producto.precio,
+  originalPrice: producto.precio,
+  image: producto.imagenUrl || "https://via.placeholder.com/300x400",
+  sizes: ["XS", "S", "M", "L", "XL"],
+  discount: 0,
+});
 
 const Catalogo = () => {
   const { categoria } = useParams<{ categoria: string }>();
@@ -35,7 +39,6 @@ const Catalogo = () => {
   const subcategoria = searchParams.get('subcategoria');
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  // Si hay subcategoría específica, renderizar el componente correspondiente
   if (categoria === 'hombre' && subcategoria === 'camisas') {
     return <Camisas />;
   }
@@ -44,17 +47,14 @@ const Catalogo = () => {
     return <AbrigosBlazers />;
   }
 
-  // Si es la categoría completa de hombre (sin subcategoría), usar el nuevo diseño
   if (categoria === 'hombre' && !subcategoria) {
     return <CatalogoHombre />;
   }
 
-  // Si es la categoría completa de mujer (sin subcategoría), usar el nuevo diseño
   if (categoria === 'mujer' && !subcategoria) {
     return <CatalogoMujer />;
   }
 
-  // Configuración de banner por categoría
   const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
     mujer: {
       titulo: "Moda Mujer",
@@ -85,57 +85,10 @@ const Catalogo = () => {
   const categoriaActual = categoria || "mujer";
   const banner = bannersCategoria[categoriaActual] || bannersCategoria.mujer;
 
-  // Hook para obtener productos desde el backend
-  // Subcategorías de Mujer: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
-  // Subcategorías de Hombre: 5 = Polos, 6 = Camisas, 7 = Bermudas, 8 = Blazers
-  const { data: productosBackendMujer, isLoading: cargandoMujer } = useProductosPorCategoria(
-    categoriaActual === "mujer" ? [1, 2, 3, 4] : []
-  );
+  const nombreCategoriaBackend = mapCategoriaBackendToFrontend[categoriaActual] || "";
+  const { data: productosBackend, isLoading, isError } = useProductosPorNombreCategoria(nombreCategoriaBackend);
 
-  const { data: productosBackendHombre, isLoading: cargandoHombre } = useProductosPorCategoria(
-    categoriaActual === "hombre" ? [5, 6, 7, 8] : []
-  );
-
-  // Select products based on category
-  let rawProducts = [];
-  if (categoriaActual === "hombre") {
-    // Usar productos del backend para Hombre
-    if (productosBackendHombre && productosBackendHombre.length > 0) {
-      rawProducts = productosBackendHombre.map((p: any) => ({
-        code: p.idProducto,
-        brand: "Topitop hombre",
-        name: p.nombre,
-        price: p.precio,
-        image: p.imagenUrl || "https://via.placeholder.com/300x400",
-        sizes: ["S", "M", "L", "XL"],
-      }));
-    } else if (!cargandoHombre) {
-      // Si no hay datos del backend y terminó de cargar, usar JSON local
-      rawProducts = productosHombreData;
-    }
-  } else if (categoriaActual === "mujer") {
-    // Usar productos del backend si están disponibles
-    if (productosBackendMujer && productosBackendMujer.length > 0) {
-      rawProducts = productosBackendMujer.map((p: any) => ({
-        code: p.idProducto,
-        brand: "TopItop",
-        name: p.nombre,
-        price: p.precio,
-        image: p.imagenUrl || "https://via.placeholder.com/300x400",
-        sizes: ["XS", "S", "M", "L", "XL"],
-      }));
-    } else if (!cargandoMujer) {
-      // Si no hay datos del backend y terminó de cargar, usar JSON local
-      rawProducts = productosMujerData;
-    }
-  } else if (categoriaActual === "infantil") {
-    rawProducts = productosInfantilData;
-  } else {
-    // Default or mixed for others for now
-    rawProducts = [...productosMujerData, ...productosHombreData].slice(0, 10); 
-  }
-
-  const productos = mapProductData(rawProducts);
+  const productos = productosBackend ? productosBackend.map(mapProductoBackend) : [];
 
   const isDenim = categoriaActual === "denim";
 
@@ -143,12 +96,9 @@ const Catalogo = () => {
     <div className="min-h-screen bg-white">
       <Encabezado />
 
-      {/* Banner Logic */}
       {isDenim ? (
         <>
-          {/* Custom Split Banner for Denim */}
           <div className="flex flex-col md:flex-row w-full h-[500px] md:h-[600px] lg:h-[700px]">
-            {/* Left Side - Mujer */}
             <div className="relative w-full md:w-1/2 h-full group overflow-hidden cursor-pointer">
               <img
                 src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/5d59cc7d-8457-437a-b92a-8e2afdd8ab03___cd7e08d10ccec4bcbe49d4c809bdd1bb.png"
@@ -164,7 +114,6 @@ const Catalogo = () => {
               </div>
             </div>
 
-            {/* Right Side - Hombre */}
             <div className="relative w-full md:w-1/2 h-full group overflow-hidden cursor-pointer">
               <img
                 src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/f099f425-e65c-44e4-9fcd-07a7d6e1b174___0868050c8033f0b9c40bf059f7fdc14c.png"
@@ -181,7 +130,6 @@ const Catalogo = () => {
             </div>
           </div>
 
-          {/* Denim Filter Bar */}
           <div className="bg-black text-white px-4 sm:px-8 py-3 sticky top-0 z-40">
             <div className="container mx-auto flex flex-wrap items-center justify-between text-xs sm:text-sm font-medium tracking-wide">
               
@@ -223,7 +171,6 @@ const Catalogo = () => {
           </div>
         </>
       ) : (
-        /* Default Banner for other categories */
         <section className="relative w-full h-[200px] sm:h-[300px] lg:h-[400px] overflow-hidden">
           <img
             src={banner.imagen}
@@ -238,9 +185,6 @@ const Catalogo = () => {
         </section>
       )}
 
-      {/* Breadcrumb - Only show if NOT denim, as denim has its own nav-like structure above or user didn't ask for it specifically there? 
-          Actually usually breadcrumbs are good. I'll keep them but styled simply.
-      */}
       {!isDenim && (
         <div className="container mx-auto px-4 sm:px-6 py-4">
           <nav className="text-sm text-gray-500">
@@ -251,19 +195,19 @@ const Catalogo = () => {
         </div>
       )}
 
-      {/* Contenedor principal con filtros y productos */}
       <div className={`container mx-auto px-4 sm:px-6 pb-16 ${isDenim ? 'pt-8' : ''}`}>
         <div className="flex gap-8">
-          {/* Filtros Sidebar - Hide for Denim as it has the top bar */}
           {!isDenim && <FiltrosCatalogo />}
 
-          {/* Área de productos */}
           <div className="flex-1">
-            {/* Barra de ordenamiento y resultados - Hide for Denim as it's in the top bar */}
             {!isDenim && (
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
                 <p className="text-sm text-gray-600">
-                  Mostrando <span className="font-semibold">{productos.length}</span> productos
+                  {isLoading ? (
+                    "Cargando productos..."
+                  ) : (
+                    <>Mostrando <span className="font-semibold">{productos.length}</span> productos</>
+                  )}
                 </p>
 
                 <div className="flex items-center gap-3">
@@ -283,31 +227,47 @@ const Catalogo = () => {
               </div>
             )}
 
-            {/* Grid de productos */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {productos.map((producto) => (
-                <TarjetaProductoHover key={producto.id} {...producto} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <Loader2 className="w-12 h-12 animate-spin text-gray-400 mb-4" />
+                <p className="text-gray-500">Cargando productos desde el servidor...</p>
+              </div>
+            ) : isError ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <p className="text-red-500 mb-2">Error al cargar los productos</p>
+                <p className="text-gray-500 text-sm">Verifica que el servidor backend esté ejecutándose</p>
+              </div>
+            ) : productos.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <p className="text-gray-500">No se encontraron productos en esta categoría</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {productos.map((producto) => (
+                  <TarjetaProductoHover key={producto.id} {...producto} />
+                ))}
+              </div>
+            )}
 
-            {/* Paginación */}
-            <div className="flex justify-center items-center gap-2 mt-12">
-              <Button variant="outline" size="sm" disabled>
-                Anterior
-              </Button>
-              <Button variant="outline" size="sm" className="bg-black text-white">
-                1
-              </Button>
-              <Button variant="outline" size="sm">
-                2
-              </Button>
-              <Button variant="outline" size="sm">
-                3
-              </Button>
-              <Button variant="outline" size="sm">
-                Siguiente
-              </Button>
-            </div>
+            {productos.length > 0 && (
+              <div className="flex justify-center items-center gap-2 mt-12">
+                <Button variant="outline" size="sm" disabled>
+                  Anterior
+                </Button>
+                <Button variant="outline" size="sm" className="bg-black text-white">
+                  1
+                </Button>
+                <Button variant="outline" size="sm">
+                  2
+                </Button>
+                <Button variant="outline" size="sm">
+                  3
+                </Button>
+                <Button variant="outline" size="sm">
+                  Siguiente
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

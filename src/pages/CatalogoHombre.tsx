@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useProductosPorCategoria } from '../hooks/use-productos';
+import { useProductosPorNombreCategoria } from '../hooks/use-productos';
 import { TarjetaProductoHover } from '../components/TarjetaProductoHover';
 import { Card, CardContent } from '../components/ui/card';
 import { Skeleton } from '../components/ui/skeleton';
@@ -9,8 +9,7 @@ import { PiePagina } from '../components/PiePagina';
 import { FiltrosAbrigosBlazers } from '../components/FiltrosAbrigosBlazers';
 
 export function CatalogoHombre() {
-  // Subcategorías de Hombre: 5=Polos, 6=Camisas, 7=Bermudas, 8=Blazers
-  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([5, 6, 7, 8]);
+  const { data: productosRaw, isLoading, error } = useProductosPorNombreCategoria("Hombre");
   const [marcaSeleccionada, setMarcaSeleccionada] = useState<string[]>([]);
   const [tallaSeleccionada, setTallaSeleccionada] = useState<string[]>([]);
   const [ordenamiento, setOrdenamiento] = useState('relevancia');
@@ -60,7 +59,7 @@ export function CatalogoHombre() {
         <div className="container mx-auto px-4 py-8 mt-16">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Moda Hombre</h1>
-            <p className="text-gray-600">Cargando productos...</p>
+            <p className="text-gray-600">Cargando productos desde el servidor...</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -95,7 +94,7 @@ export function CatalogoHombre() {
               No pudimos cargar los productos de Hombre.
             </p>
             <p className="text-sm text-gray-500">
-              Error: {error instanceof Error ? error.message : 'Error desconocido'}
+              Verifica que el servidor backend esté ejecutándose
             </p>
           </div>
         </div>
@@ -128,7 +127,6 @@ export function CatalogoHombre() {
     <>
       <Encabezado variant="solid" />
 
-      {/* Banner Hero */}
       <div className="relative h-[500px] bg-gray-200 flex items-center overflow-hidden mt-16">
         <img
           src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/f5e9cc42-0c58-46f1-b0e0-ff00e870d64f___1ca792e01845d6a502b5e0412b09e723.png"
@@ -140,7 +138,6 @@ export function CatalogoHombre() {
         </div>
       </div>
 
-      {/* Breadcrumbs */}
       <div className="bg-white py-4 border-b">
         <div className="container mx-auto px-4">
           <nav className="flex space-x-2 text-sm text-gray-600">
@@ -151,7 +148,6 @@ export function CatalogoHombre() {
         </div>
       </div>
 
-      {/* Filtros */}
       <FiltrosAbrigosBlazers
         marca={marcaSeleccionada}
         talla={tallaSeleccionada}
@@ -160,7 +156,6 @@ export function CatalogoHombre() {
         onOrdenamiento={setOrdenamiento}
       />
 
-      {/* Contenido principal */}
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <p className="text-gray-600">
@@ -168,13 +163,12 @@ export function CatalogoHombre() {
           </p>
         </div>
 
-        {/* Grid de productos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {productos.map((producto) => (
             <TarjetaProductoHover
               key={producto.idProducto}
               id={producto.idProducto.toString()}
-              brand="Topitop hombre"
+              brand={producto.subcategoria?.nombre || "Topitop hombre"}
               name={producto.nombre}
               price={producto.precio}
               image={producto.imagenUrl || 'https://via.placeholder.com/300'}

@@ -75,11 +75,37 @@ export const useProductosPorCategoria = (subcategoriaIds: number[]) => {
         ProductoService.obtenerProductosPorSubcategoria(id)
       );
       const resultados = await Promise.all(productosPromesas);
-      // Combinar todos los productos de todas las subcategorías
       return resultados.flat();
     },
     enabled: subcategoriaIds.length > 0,
-    staleTime: 5 * 60 * 1000, // 5 minutos de caché
-    gcTime: 10 * 60 * 1000, // 10 minutos en garbage collection
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  });
+};
+
+// Hook para obtener productos por nombre de categoría (para las páginas de catálogo)
+export const useProductosPorNombreCategoria = (nombreCategoria: string) => {
+  return useQuery({
+    queryKey: ['productos', 'categoria-nombre', nombreCategoria.toLowerCase()],
+    queryFn: async () => {
+      const { CategoriaService } = await import('../services/categoria.service');
+      const { SubcategoriaService } = await import('../services/subcategoria.service');
+      
+      const categoria = await CategoriaService.obtenerCategoriaPorNombre(nombreCategoria);
+      if (!categoria) {
+        return [];
+      }
+      
+      const subcategorias = await SubcategoriaService.obtenerSubcategoriasPorCategoria(categoria.idCategoria);
+      
+      const productosPromesas = subcategorias.map((sub: any) => 
+        ProductoService.obtenerProductosPorSubcategoria(sub.idSubcategoria)
+      );
+      const resultados = await Promise.all(productosPromesas);
+      return resultados.flat();
+    },
+    enabled: !!nombreCategoria && nombreCategoria.length > 0,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 };

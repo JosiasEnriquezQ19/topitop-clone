@@ -4,38 +4,28 @@ import { PiePagina } from "@/components/PiePagina";
 import { BotonWhatsApp } from "@/components/BotonWhatsApp";
 import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
 import { FiltrosAbrigosBlazers } from "@/components/FiltrosAbrigosBlazers";
-import { useProductosPorCategoria } from "@/hooks/use-productos";
+import { useProductosPorNombreCategoria } from "@/hooks/use-productos";
+import { Loader2 } from "lucide-react";
 
 export const CatalogoMujer = () => {
   const [marcaSeleccionada, setMarcaSeleccionada] = useState<string[]>([]);
   const [tallaSeleccionada, setTallaSeleccionada] = useState<string[]>([]);
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  // Obtener productos de todas las subcategorías de Mujer
-  // Subcategorías: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
-  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([1, 2, 3, 4]);
+  const { data: productosRaw, isLoading, error } = useProductosPorNombreCategoria("Mujer");
 
-  // Filtrar y ordenar productos
   const productosFiltrados = React.useMemo(() => {
     if (!productosRaw) return [];
 
     let resultado = [...productosRaw];
 
-    // Filtrar por marca
     if (marcaSeleccionada.length > 0) {
       resultado = resultado.filter((p) => {
-        const marca = "Topitop mujer"; // Todas son de la misma marca por ahora
+        const marca = "Topitop mujer";
         return marcaSeleccionada.includes(marca);
       });
     }
 
-    // Filtrar por talla
-    if (tallaSeleccionada.length > 0) {
-      // Aquí asumimos que todos los productos tienen todas las tallas
-      // Si tuvieras campo de tallas en la BD, filtrarías aquí
-    }
-
-    // Ordenar
     if (ordenamiento === "precio-menor") {
       resultado.sort((a, b) => a.precio - b.precio);
     } else if (ordenamiento === "precio-mayor") {
@@ -51,8 +41,9 @@ export const CatalogoMujer = () => {
     return (
       <div className="min-h-screen bg-white">
         <Encabezado variant="solid" />
-        <div className="flex items-center justify-center h-[500px]">
-          <p className="text-xl">Cargando productos...</p>
+        <div className="flex flex-col items-center justify-center h-[500px]">
+          <Loader2 className="w-12 h-12 animate-spin text-gray-400 mb-4" />
+          <p className="text-xl text-gray-600">Cargando productos desde el servidor...</p>
         </div>
       </div>
     );
@@ -62,8 +53,9 @@ export const CatalogoMujer = () => {
     return (
       <div className="min-h-screen bg-white">
         <Encabezado variant="solid" />
-        <div className="flex items-center justify-center h-[500px]">
-          <p className="text-xl text-red-600">Error al cargar productos</p>
+        <div className="flex flex-col items-center justify-center h-[500px]">
+          <p className="text-xl text-red-600 mb-2">Error al cargar productos</p>
+          <p className="text-gray-500">Verifica que el servidor backend esté ejecutándose</p>
         </div>
       </div>
     );
@@ -73,7 +65,6 @@ export const CatalogoMujer = () => {
     <div className="min-h-screen bg-white">
       <Encabezado variant="solid" />
 
-      {/* Banner Principal */}
       <div className="relative w-full h-[500px] mt-16">
         <img
           src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png"
@@ -87,7 +78,6 @@ export const CatalogoMujer = () => {
         </div>
       </div>
 
-      {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center gap-2 text-sm text-gray-600">
           <a href="/" className="hover:text-black">
@@ -98,7 +88,6 @@ export const CatalogoMujer = () => {
         </div>
       </div>
 
-      {/* Filtros */}
       <FiltrosAbrigosBlazers
         marca={marcaSeleccionada}
         talla={tallaSeleccionada}
@@ -107,7 +96,6 @@ export const CatalogoMujer = () => {
         onOrdenamiento={setOrdenamiento}
       />
 
-      {/* Productos */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-4">
           <p className="text-sm text-gray-600">
@@ -130,7 +118,7 @@ export const CatalogoMujer = () => {
                 name={producto.nombre}
                 price={producto.precio}
                 image={producto.imagenUrl || "https://via.placeholder.com/300x400"}
-                brand="Topitop mujer"
+                brand={producto.subcategoria?.nombre || "Topitop mujer"}
               />
             ))}
           </div>
