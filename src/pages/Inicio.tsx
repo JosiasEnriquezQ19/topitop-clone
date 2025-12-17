@@ -52,7 +52,7 @@ const Inicio = () => {
       {/* Sección Infantil - Niñas y Niños */}
       <SeccionInfantil />
 
-      {/* Carrusel Vestidos Infantil */}
+      {/* Niños y Maravillas */}
       <CarruselVestidosInfantil />
 
       {/* Instagram Gallery */}
