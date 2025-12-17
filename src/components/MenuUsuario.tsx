@@ -5,6 +5,7 @@ import { ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "@/lib/api-client";
 import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 interface UserMenuProps {
     children: ReactNode;
@@ -218,7 +219,7 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
                             <h3 className="text-[15px] font-normal mb-2 text-black tracking-wide">Escoja una opción para entrar</h3>
 
                             <Button 
-                                onClick={() => handleOpenDialog('register')}
+                                onClick={() => toast.info("Esta funcionalidad está en implementación")}
                                 variant="outline" 
                                 className="w-full justify-center font-bold text-[11px] h-[42px] border-black text-black hover:bg-gray-50 uppercase tracking-wider rounded-sm">
                                 Recibir código de acceso por e-mail
@@ -232,9 +233,9 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
                             </Button>
 
                             <Button 
+                                onClick={() => toast.info("Esta funcionalidad está en implementación")}
                                 variant="outline" 
-                                disabled
-                                className="w-full justify-center font-bold text-[11px] h-[42px] border-black text-black hover:bg-gray-50 uppercase tracking-wider flex items-center gap-3 rounded-sm opacity-60 cursor-not-allowed">
+                                className="w-full justify-center font-bold text-[11px] h-[42px] border-black text-black hover:bg-gray-50 uppercase tracking-wider flex items-center gap-3 rounded-sm">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
@@ -245,9 +246,9 @@ export const MenuUsuario = ({ children, usuario, setUsuario }: UserMenuProps) =>
                             </Button>
 
                             <Button 
+                                onClick={() => toast.info("Esta funcionalidad está en implementación")}
                                 variant="outline" 
-                                disabled
-                                className="w-full justify-center font-bold text-[11px] h-[42px] border-black text-black hover:bg-gray-50 uppercase tracking-wider flex items-center gap-3 rounded-sm opacity-60 cursor-not-allowed">
+                                className="w-full justify-center font-bold text-[11px] h-[42px] border-black text-black hover:bg-gray-50 uppercase tracking-wider flex items-center gap-3 rounded-sm">
                                 <svg className="w-4 h-4 text-[#1877F2] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.84c0-2.71 1.482-4.668 4.166-4.668 1.287 0 2.643.23 2.643.23v2.892h-1.494c-1.344 0-1.553.834-1.553 1.69v1.696h3.259l-1.035 3.667h-2.224v7.98h-3.762z" />
                                 </svg>

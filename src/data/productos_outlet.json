@@ -1,0 +1,152 @@
+[
+  {
+    "brand": "Topitop Mujer",
+    "name": "Casaca Mujer Nico Azul Náutico",
+    "code": "3110999",
+    "price": 75.96,
+    "originalPrice": 189.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/386812/3110998_1.jpg?v=638870118197770000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Topitop Hombre",
+    "name": "Camisa Hombre Erwin Total Bleach",
+    "code": "3172451",
+    "price": 51.96,
+    "originalPrice": 129.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/394627/3172450_1.jpg?v=638987313813600000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
+  },
+  {
+    "brand": "Topitop Hombre",
+    "name": "Jean Hombre Bruce Total Grafito",
+    "code": "3172420",
+    "price": 67.96,
+    "originalPrice": 169.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393939/3172418_1.jpg?v=638975768475730000",
+    "sizes": ["28", "30", "32", "34", "36", "38"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Jean Mujer Tayne Total Dirty Cristal",
+    "code": "3164885",
+    "price": 71.96,
+    "originalPrice": 179.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/389846/3164887_1.jpg?v=638929678174670000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Overol Mujer Elena Total Bleach",
+    "code": "3164792",
+    "price": 67.96,
+    "originalPrice": 169.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/391096/3164792_1.jpg?v=638949749100700000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Topitop Hombre",
+    "name": "Camisa Hombre Kurwen Total Dirty Green",
+    "code": "3164379",
+    "price": 59.96,
+    "originalPrice": 149.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/389794/3164380_1.jpg?v=638929672225530000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Casaca Mujer Guinda",
+    "code": "3160411",
+    "price": 71.96,
+    "originalPrice": 179.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/391697/3160409_1.jpg?v=638951021035500000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Casaca Mujer Negro",
+    "code": "3160398",
+    "price": 71.96,
+    "originalPrice": 179.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/391691/3160395_1.jpg?v=638951020224400000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Blusa Mujer Karla Azul Pacífico",
+    "code": "3159884",
+    "price": 35.96,
+    "originalPrice": 89.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/391733/3159884_1.jpg?v=638951117262600000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Topitop Kids",
+    "name": "Vestido Niña Catalina Amarillo Pastel",
+    "code": "3157194",
+    "price": 27.96,
+    "originalPrice": 69.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/395411/3157192_1.jpg?v=638987640656330000",
+    "sizes": ["4", "6", "8", "10", "12", "14"]
+  },
+  {
+    "brand": "Topitop Mujer",
+    "name": "Pantalón Mujer Estrella Beige Crema",
+    "code": "3148164",
+    "price": 39.96,
+    "originalPrice": 99.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396508/3148164_1.jpg?v=638993567650630000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Topitop Hombre",
+    "name": "Polo Hombre Ronald Negro",
+    "code": "3147212",
+    "price": 23.96,
+    "originalPrice": 59.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/388091/3147213_2.jpg?v=638902017396400000",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
+  },
+  {
+    "brand": "Hawk",
+    "name": "Polo Cuello Camisa Hombre Pako Beige Arena",
+    "code": "3141048",
+    "price": 35.96,
+    "originalPrice": 89.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393527-500-auto?v=638975721780330000&width=500&height=auto&aspect=true",
+    "sizes": ["S", "M", "L", "XL", "XXL"]
+  },
+  {
+    "brand": "Topitop Hombre",
+    "name": "Pantalón Hombre Dorian Beige Arena",
+    "code": "3134459",
+    "price": 55.96,
+    "originalPrice": 139.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/396752/3134457_1.jpg?v=638993789875530000",
+    "sizes": ["28", "30", "32", "34", "36", "38"]
+  },
+  {
+    "brand": "Topitop Mujer",
+    "name": "Blusa Mujer Italia Blanco Optico",
+    "code": "3134435",
+    "price": 39.96,
+    "originalPrice": 99.90,
+    "discount": 60,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/392967/3134435_1.jpg?v=638965884911970000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  }
+]

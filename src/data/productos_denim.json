@@ -1,0 +1,82 @@
+[
+  {
+    "brand": "Xiomi",
+    "name": "Falda Short Denim Mujer Maju Total Frost Bleach",
+    "code": "3180000",
+    "price": 69.95,
+    "originalPrice": 139.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/392224/3180001_1.jpg?v=638957318334470000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Falda Short Denim Mujer Maju Total Stone Melange",
+    "code": "3180004",
+    "price": 69.95,
+    "originalPrice": 139.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/392220/3180005_1.jpg?v=638957317903200000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Top Denim Mujer Denise Total Dirty Green",
+    "code": "3171362",
+    "price": 64.95,
+    "originalPrice": 129.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/392208/3171363_1.jpg?v=638957316525000000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Top Denim Mujer Denise Total Light Bleach",
+    "code": "3171355",
+    "price": 64.95,
+    "originalPrice": 129.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/392204/3171356_1.jpg?v=638957316053900000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Topitop Mujer",
+    "name": "Blusa Mujer Cinthia Total Dirty Stone",
+    "code": "3176831",
+    "price": 79.95,
+    "originalPrice": 159.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393971/3176830_1.jpg?v=638975771919800000",
+    "sizes": ["XS", "S", "M", "L", "XL"]
+  },
+  {
+    "brand": "Topitop Mujer",
+    "name": "Falda Denim Mujer Zahori Cristal",
+    "code": "3173387",
+    "price": 79.95,
+    "originalPrice": 159.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393987/3173387_1.jpg?v=638975773706500000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Topitop Mujer",
+    "name": "Falda Denim Mujer Zahori Total Sky",
+    "code": "3173365",
+    "price": 79.95,
+    "originalPrice": 159.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393991/3173365_.jpg?v=638975774134270000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  },
+  {
+    "brand": "Xiomi",
+    "name": "Jean Mujer Tayra Total Bleach",
+    "code": "3173058",
+    "price": 84.95,
+    "originalPrice": 169.90,
+    "discount": 50,
+    "image": "https://topitop.vtexassets.com/arquivos/ids/393999/3173060_1.jpg?v=638975774999530000",
+    "sizes": ["26", "28", "30", "32", "34"]
+  }
+]

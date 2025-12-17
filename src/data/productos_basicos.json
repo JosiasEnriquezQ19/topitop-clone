@@ -1,0 +1,115 @@
+{
+  "banner": "https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/cb13691e-a5be-4ad8-a03b-a2a931dbd332___74101d2092cf5a0ceeb4a1d3f4055512.png",
+  "products": [
+    {
+      "brand": "Topitop Mujer",
+      "name": "Polo Cuello Camisa Mujer Leah Marron Roble",
+      "code": "3153645",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394681/3153645_1.jpg?v=638987556463000000",
+      "sizes": ["XS", "S", "M", "L", "XL"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Beige Arena",
+      "code": "3153666",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394669/3153666_1.jpg?v=638987555206700000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Rosado Wood",
+      "code": "3153680",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394665/3153680_1.jpg?v=638987554786700000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Celeste",
+      "code": "3153694",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394660/3153694_1.jpg?v=638987554326100000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Acero",
+      "code": "3153687",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/393395/3153687_1.jpg?v=638975706887170000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Verde Trellis",
+      "code": "3153673",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/393399/3153673_1.jpg?v=638975707332800000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Marrón Claro",
+      "code": "3153701",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/393391/3153701_1.jpg?v=638975706441270000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Grey Fit Poly Htr",
+      "code": "3146581",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394685/3146581_1.jpg?v=638987556886470000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Short Mujer Ariana Negro",
+      "code": "3146574",
+      "price": 34.95,
+      "originalPrice": 69.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/393403/3146574_1.jpg?v=638975707762530000",
+      "sizes": ["26", "28", "30", "32", "34"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Polera Mujer Serene Rosado Vintage",
+      "code": "3097273",
+      "price": 44.95,
+      "originalPrice": 89.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/394700/3097272_1.jpg?v=638987558553970000",
+      "sizes": ["XS", "S", "M", "L", "XL"]
+    },
+    {
+      "brand": "Topitop Mujer",
+      "name": "Polera Mujer Serene Acero",
+      "code": "3100215",
+      "price": 44.95,
+      "originalPrice": 89.90,
+      "discount": 50,
+      "image": "https://topitop.vtexassets.com/arquivos/ids/393407/3100210_1.jpg?v=638975708184100000",
+      "sizes": ["XS", "S", "M", "L", "XL"]
+    }
+  ]
+}
