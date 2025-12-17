@@ -6,14 +6,14 @@ import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
 import { FiltrosAbrigosBlazers } from "@/components/FiltrosAbrigosBlazers";
 import { useProductosPorCategoria } from "@/hooks/use-productos";
 
-export const CatalogoMujer = () => {
-  const [marcaSeleccionada, setMarcaSeleccionada] = useState<string[]>([]);
-  const [tallaSeleccionada, setTallaSeleccionada] = useState<string[]>([]);
+export const CatalogoBasicos = () => {
+  const [marca, setMarca] = useState<string[]>([]);
+  const [talla, setTalla] = useState<string[]>([]);
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  // Obtener productos de todas las subcategorías de Mujer
-  // Subcategorías: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
-  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([1, 2, 3, 4]);
+  // Obtener productos de todas las subcategorías de Básicos
+  // Subcategorías: 17 = Polos Básicos, 18 = Shorts Básicos
+  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([17, 18]);
 
   // Filtrar y ordenar productos
   const productosFiltrados = React.useMemo(() => {
@@ -22,15 +22,17 @@ export const CatalogoMujer = () => {
     let resultado = [...productosRaw];
 
     // Filtrar por marca
-    if (marcaSeleccionada.length > 0) {
+    if (marca.length > 0) {
       resultado = resultado.filter((p) => {
-        const marca = "Topitop mujer"; // Todas son de la misma marca por ahora
-        return marcaSeleccionada.includes(marca);
+        return marca.some(m => 
+          p.descripcion?.toLowerCase().includes(m.toLowerCase()) ||
+          m === 'Topitop Mujer'
+        );
       });
     }
 
     // Filtrar por talla
-    if (tallaSeleccionada.length > 0) {
+    if (talla.length > 0) {
       // Aquí asumimos que todos los productos tienen todas las tallas
       // Si tuvieras campo de tallas en la BD, filtrarías aquí
     }
@@ -45,7 +47,7 @@ export const CatalogoMujer = () => {
     }
 
     return resultado;
-  }, [productosRaw, marcaSeleccionada, tallaSeleccionada, ordenamiento]);
+  }, [productosRaw, marca, talla, ordenamiento]);
 
   if (isLoading) {
     return (
@@ -76,13 +78,13 @@ export const CatalogoMujer = () => {
       {/* Banner Principal */}
       <div className="relative w-full h-[500px] mt-16">
         <img
-          src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png"
-          alt="Moda Mujer"
+          src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/0b3428ba-89eb-4d6a-9fc5-1eceae228f2f___aa9969c4000aa95e5bcf2bd104ed9aa2.png"
+          alt="Básicos"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-start pl-12">
           <h1 className="text-6xl font-bold text-white drop-shadow-lg">
-            Moda Mujer
+            Básicos
           </h1>
         </div>
       </div>
@@ -94,16 +96,16 @@ export const CatalogoMujer = () => {
             Inicio
           </a>
           <span>/</span>
-          <span className="text-black font-medium">Mujer</span>
+          <span className="text-black font-medium">Básicos</span>
         </div>
       </div>
 
       {/* Filtros */}
       <FiltrosAbrigosBlazers
-        marca={marcaSeleccionada}
-        talla={tallaSeleccionada}
-        onMarcaChange={setMarcaSeleccionada}
-        onTallaChange={setTallaSeleccionada}
+        marca={marca}
+        talla={talla}
+        onMarcaChange={setMarca}
+        onTallaChange={setTalla}
         onOrdenamiento={setOrdenamiento}
       />
 
@@ -130,7 +132,7 @@ export const CatalogoMujer = () => {
                 name={producto.nombre}
                 price={producto.precio}
                 image={producto.imagenUrl || "https://via.placeholder.com/300x400"}
-                brand="Topitop mujer"
+                brand="Topitop Mujer"
               />
             ))}
           </div>

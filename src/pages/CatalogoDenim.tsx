@@ -6,14 +6,14 @@ import { TarjetaProductoHover } from "@/components/TarjetaProductoHover";
 import { FiltrosAbrigosBlazers } from "@/components/FiltrosAbrigosBlazers";
 import { useProductosPorCategoria } from "@/hooks/use-productos";
 
-export const CatalogoMujer = () => {
-  const [marcaSeleccionada, setMarcaSeleccionada] = useState<string[]>([]);
-  const [tallaSeleccionada, setTallaSeleccionada] = useState<string[]>([]);
+export const CatalogoDenim = () => {
+  const [marca, setMarca] = useState<string[]>([]);
+  const [talla, setTalla] = useState<string[]>([]);
   const [ordenamiento, setOrdenamiento] = useState("relevancia");
 
-  // Obtener productos de todas las subcategorías de Mujer
-  // Subcategorías: 1 = Vestidos, 2 = Abrigos y Blazers, 3 = Chalecos, 4 = Jeans
-  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([1, 2, 3, 4]);
+  // Obtener productos de todas las subcategorías de Denim
+  // Subcategorías: 14 = Faldas Denim, 15 = Tops Denim, 16 = Jeans
+  const { data: productosRaw, isLoading, error } = useProductosPorCategoria([14, 15, 16]);
 
   // Filtrar y ordenar productos
   const productosFiltrados = React.useMemo(() => {
@@ -22,15 +22,17 @@ export const CatalogoMujer = () => {
     let resultado = [...productosRaw];
 
     // Filtrar por marca
-    if (marcaSeleccionada.length > 0) {
+    if (marca.length > 0) {
       resultado = resultado.filter((p) => {
-        const marca = "Topitop mujer"; // Todas son de la misma marca por ahora
-        return marcaSeleccionada.includes(marca);
+        return marca.some(m => 
+          p.descripcion?.toLowerCase().includes(m.toLowerCase()) ||
+          m === 'Topitop Mujer' || m === 'Xiomi'
+        );
       });
     }
 
     // Filtrar por talla
-    if (tallaSeleccionada.length > 0) {
+    if (talla.length > 0) {
       // Aquí asumimos que todos los productos tienen todas las tallas
       // Si tuvieras campo de tallas en la BD, filtrarías aquí
     }
@@ -45,7 +47,7 @@ export const CatalogoMujer = () => {
     }
 
     return resultado;
-  }, [productosRaw, marcaSeleccionada, tallaSeleccionada, ordenamiento]);
+  }, [productosRaw, marca, talla, ordenamiento]);
 
   if (isLoading) {
     return (
@@ -73,39 +75,16 @@ export const CatalogoMujer = () => {
     <div className="min-h-screen bg-white">
       <Encabezado variant="solid" />
 
-      {/* Banner Principal */}
-      <div className="relative w-full h-[500px] mt-16">
-        <img
-          src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png"
-          alt="Moda Mujer"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 flex items-center justify-start pl-12">
-          <h1 className="text-6xl font-bold text-white drop-shadow-lg">
-            Moda Mujer
-          </h1>
-        </div>
-      </div>
-
-      {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
-          <a href="/" className="hover:text-black">
-            Inicio
-          </a>
-          <span>/</span>
-          <span className="text-black font-medium">Mujer</span>
-        </div>
-      </div>
-
       {/* Filtros */}
-      <FiltrosAbrigosBlazers
-        marca={marcaSeleccionada}
-        talla={tallaSeleccionada}
-        onMarcaChange={setMarcaSeleccionada}
-        onTallaChange={setTallaSeleccionada}
-        onOrdenamiento={setOrdenamiento}
-      />
+      <div className="mt-16">
+        <FiltrosAbrigosBlazers
+          marca={marca}
+          talla={talla}
+          onMarcaChange={setMarca}
+          onTallaChange={setTalla}
+          onOrdenamiento={setOrdenamiento}
+        />
+      </div>
 
       {/* Productos */}
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -130,7 +109,7 @@ export const CatalogoMujer = () => {
                 name={producto.nombre}
                 price={producto.precio}
                 image={producto.imagenUrl || "https://via.placeholder.com/300x400"}
-                brand="Topitop mujer"
+                brand="Denim"
               />
             ))}
           </div>

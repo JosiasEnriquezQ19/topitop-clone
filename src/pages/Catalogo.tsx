@@ -12,6 +12,9 @@ import { Camisas } from "./Camisas";
 import { AbrigosBlazers } from "./AbrigosBlazers";
 import { CatalogoHombre } from "./CatalogoHombre";
 import { CatalogoMujer } from "./CatalogoMujer";
+import { CatalogoInfantil } from "./CatalogoInfantil";
+import { CatalogoDenim } from "./CatalogoDenim";
+import { CatalogoBasicos } from "./CatalogoBasicos";
 
 import productosHombreData from "@/data/productos_hombre.json";
 import productosMujerData from "@/data/productos_mujer.json";
@@ -52,6 +55,21 @@ const Catalogo = () => {
   // Si es la categoría completa de mujer (sin subcategoría), usar el nuevo diseño
   if (categoria === 'mujer' && !subcategoria) {
     return <CatalogoMujer />;
+  }
+
+  // Si es la categoría completa de infantil (sin subcategoría), usar el nuevo diseño
+  if (categoria === 'infantil' && !subcategoria) {
+    return <CatalogoInfantil />;
+  }
+
+  // Si es la categoría completa de denim (sin subcategoría), usar el nuevo diseño
+  if (categoria === 'denim' && !subcategoria) {
+    return <CatalogoDenim />;
+  }
+
+  // Si es la categoría completa de básicos (sin subcategoría), usar el nuevo diseño
+  if (categoria === 'basicos' && !subcategoria) {
+    return <CatalogoBasicos />;
   }
 
   // Configuración de banner por categoría
