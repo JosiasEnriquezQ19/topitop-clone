@@ -52,16 +52,26 @@ const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = 
   }
 };
 
-const mapProductoBackend = (producto: any) => ({
-  id: producto.idProducto,
-  brand: producto.subcategoria?.nombre || "Topitop",
-  name: producto.nombre,
-  price: producto.precio,
-  originalPrice: producto.precio,
-  image: producto.imagenUrl || "https://via.placeholder.com/300x400",
-  sizes: ["XS", "S", "M", "L", "XL"],
-  discount: 0,
-});
+const mapProductoBackend = (producto: any) => {
+  const esInfantil = 
+    producto.nombre?.toLowerCase().includes("niña") ||
+    producto.nombre?.toLowerCase().includes("niño") ||
+    producto.nombre?.toLowerCase().includes("kids") ||
+    producto.subcategoria?.nombre?.toLowerCase().includes("niña") ||
+    producto.subcategoria?.nombre?.toLowerCase().includes("niño") ||
+    producto.subcategoria?.nombre?.toLowerCase().includes("infantil");
+
+  return {
+    id: producto.idProducto,
+    brand: producto.subcategoria?.nombre || "Topitop",
+    name: producto.nombre,
+    price: producto.precio,
+    originalPrice: producto.precio,
+    image: producto.imagenUrl || "https://via.placeholder.com/300x400",
+    sizes: esInfantil ? ["02", "04", "06", "08", "10", "12", "14"] : ["XS", "S", "M", "L", "XL"],
+    discount: 0,
+  };
+};
 
 const Catalogo = () => {
   const { categoria } = useParams<{ categoria: string }>();

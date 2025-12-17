@@ -19,8 +19,18 @@ const DetalleProducto = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [openSection, setOpenSection] = useState<string | null>(null);
 
-  // Tallas disponibles por defecto (ya que dejamos talla como fint)
-  const tallasDisponibles = ["XS", "S", "M", "L", "XL"];
+  const esProductoInfantil = product ? (
+    product.nombre?.toLowerCase().includes("niña") ||
+    product.nombre?.toLowerCase().includes("niño") ||
+    product.nombre?.toLowerCase().includes("kids") ||
+    product.subcategoria?.nombre?.toLowerCase().includes("niña") ||
+    product.subcategoria?.nombre?.toLowerCase().includes("niño") ||
+    product.subcategoria?.nombre?.toLowerCase().includes("infantil")
+  ) : false;
+
+  const tallasDisponibles = esProductoInfantil 
+    ? ["02", "04", "06", "08", "10", "12", "14"]
+    : ["XS", "S", "M", "L", "XL"];
 
   if (isLoading) {
     return (
