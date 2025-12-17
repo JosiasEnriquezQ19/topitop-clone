@@ -6,7 +6,6 @@ import { SeccionNavidad } from "@/components/SeccionNavidad";
 import { SeccionPolosShorts } from "@/components/SeccionPolosShorts";
 import { SeccionHombres } from "@/components/SeccionHombres";
 import { SeccionInfantil } from "@/components/SeccionInfantil";
-import { SeccionProductosFiltrados } from "@/components/SeccionProductosFiltrados";
 import { CarruselVestidosInfantil } from "@/components/CarruselVestidosInfantil";
 import { GaleriaInstagram } from "@/components/GaleriaInstagram";
 import { SeccionDevoluciones } from "@/components/SeccionDevoluciones";
@@ -46,8 +45,6 @@ const Inicio = () => {
       {/* Sección Hombres - Polos y Bermudas / Camisas y Pantalones */}
       <SeccionHombres />
 
-      {/* Filtered Product Section - Hawk Collection */}
-      <SeccionProductosFiltrados />
 
       {/* Sección Infantil - Niñas y Niños */}
       <SeccionInfantil />
