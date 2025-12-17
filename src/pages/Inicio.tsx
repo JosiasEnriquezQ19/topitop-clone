@@ -40,7 +40,7 @@ const Inicio = () => {
         <SeccionNavidad />
       </div>
 
-      {/* Sección Polos y Shorts */}
+      {/* Sección Moda Mujer */}
       <SeccionPolosShorts />
 
       {/* Sección Hombres - Polos y Bermudas / Camisas y Pantalones */}
