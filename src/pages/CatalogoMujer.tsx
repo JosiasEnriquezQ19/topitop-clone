@@ -68,12 +68,12 @@ export const CatalogoMujer = () => {
       <div className="relative w-full h-[500px] mt-16">
         <img
           src="https://topitop.vtexassets.com/assets/vtex.file-manager-graphql/images/ab3e169c-d507-4318-8381-6e50a5af4699___3cc8eb376772abb7ad6c31a12b279d77.png"
-          alt="Moda Mujer"
+          alt="Mujer"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-start pl-12">
-          <h1 className="text-6xl font-bold text-white drop-shadow-lg">
-            Moda Mujer
+          <h1 className="text-6xl font-bold text-black drop-shadow-lg">
+            Mujer
           </h1>
         </div>
       </div>

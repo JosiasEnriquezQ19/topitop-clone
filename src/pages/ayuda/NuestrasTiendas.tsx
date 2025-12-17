@@ -19,8 +19,8 @@ const TiendaCard = ({ nombre, direccion, horario }: { nombre: string; direccion:
 const NuestrasTiendas = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
-      <div className="container mx-auto px-4 py-12">
+      <Encabezado variant="solid" />
+      <div className="container mx-auto px-4 py-12 mt-16">
         <h1 className="text-3xl font-bold mb-8 text-center uppercase">Nuestras Tiendas</h1>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
