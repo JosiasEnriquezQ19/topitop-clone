@@ -77,7 +77,7 @@ const DetalleProducto = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Encabezado />
+      <Encabezado variant="solid" />
 
       {/* Marquee Banner */}
       <section className="bg-black text-white py-2 overflow-hidden mt-24">
