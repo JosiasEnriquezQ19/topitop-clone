@@ -101,10 +101,10 @@ export const TarjetaProductoHover = ({
           {name}
         </h3>
         <div className="flex items-center gap-2">
-          <span className="text-base font-bold">S/ {price.toFixed(2)}</span>
+          <span className="text-base font-bold">S/ {price?.toFixed(2) || '0.00'}</span>
           {originalPrice && (
             <span className="text-sm text-gray-400 line-through">
-              S/ {originalPrice.toFixed(2)}
+              S/ {originalPrice?.toFixed(2)}
             </span>
           )}
         </div>

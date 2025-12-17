@@ -12,6 +12,9 @@ import { Camisas } from "./Camisas";
 import { AbrigosBlazers } from "./AbrigosBlazers";
 import { CatalogoHombre } from "./CatalogoHombre";
 import { CatalogoMujer } from "./CatalogoMujer";
+import { CatalogoInfantil } from "./CatalogoInfantil";
+import { CatalogoDenim } from "./CatalogoDenim";
+import { CatalogoBasicos } from "./CatalogoBasicos";
 
 const mapCategoriaBackendToFrontend: { [key: string]: string } = {
   basicos: "Básicos",
@@ -53,6 +56,19 @@ const Catalogo = () => {
 
   if (categoria === 'mujer' && !subcategoria) {
     return <CatalogoMujer />;
+  }
+
+
+  if (categoria === 'infantil' && !subcategoria) {
+    return <CatalogoInfantil />;
+  }
+
+  if (categoria === 'denim' && !subcategoria) {
+    return <CatalogoDenim />;
+  }
+
+  if (categoria === 'basicos' && !subcategoria) {
+    return <CatalogoBasicos />;
   }
 
   const bannersCategoria: { [key: string]: { titulo: string; imagen: string } } = {
